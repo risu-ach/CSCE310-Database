@@ -24,5 +24,10 @@
         <button type="submit">Manage Certifications</button>
     </form>
 
+    <!-- Button for Managing Programs -->
+    <form action="admin_programs.php" method="post">
+    <button type="submit">Manage Programs</button>
+    </form>
+
 </body>
 </html>

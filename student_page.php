@@ -24,5 +24,10 @@
         <button type="submit">Certification Enrollment</button>
     </form>
 
+    <!-- Button for Application Management -->
+    <form action="student_applications.php" method="post">
+    <button type="submit">Program Applications</button>
+    </form>
+
 </body>
 </html>
