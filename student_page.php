@@ -72,7 +72,7 @@ function displayUserProfile($userUIN, $conn)
 function removeAccess($userUIN, $conn)
 {
 
-    $sql = "UPDATE users SET User_type='No Access' WHERE UIN=$userUIN";
+    $sql = "UPDATE users SET User_type='No Access Student' WHERE UIN=$userUIN";
     if ($conn->query($sql) === TRUE) {
         // Add any additional actions after successful update
         header("Location: logout.php");
@@ -88,7 +88,8 @@ function updateCredentials($userUIN, $newUsername, $newPassword, $conn)
     $sql = "UPDATE users SET Username='$newUsername', Passwords='$newPassword' WHERE UIN=$userUIN";
     if ($conn->query($sql) === TRUE) {
         // Add any additional actions after successful update
-        echo "Credentials updated successfully.";
+        echo '<script>displayMessage("Credentials updated Successfully.");</script>';
+
     } else {
         echo "Error: " . $sql . "\n" . $conn->error;
     }
@@ -137,7 +138,8 @@ function updateProfileFields($userUIN, $formData, $conn)
                 $stmt->bind_param('si', $value, $userUIN);
 
                 if ($stmt->execute() !== TRUE) {
-                    echo "Error updating $field in college_student table: " . $stmt->error;
+                    echo '<script>displayMessage("Error updating.");</script>';
+
                 }
 
             
@@ -148,7 +150,8 @@ function updateProfileFields($userUIN, $formData, $conn)
     }
 
     // Add any additional actions after successful update
-    echo "Profile updated successfully.";
+    echo '<script>displayMessage("Profile Updated Successfully.");</script>';
+
 }
 
 // Function to get column names of a table
@@ -165,6 +168,15 @@ function getColumnNames($conn, $tableName) {
 }
 
 ?>
+
+<script>
+
+
+    function displayMessage(message) {
+        alert(message);
+    }
+
+</script>
 
 
 
@@ -187,11 +199,15 @@ function getColumnNames($conn, $tableName) {
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+            
         }
 
         table {
             border-collapse: collapse;
             width: 100%;
+            margin-top: 20px;
         }
 
         th,
@@ -202,7 +218,8 @@ function getColumnNames($conn, $tableName) {
         }
 
         th {
-            background-color: #f2f2f2;
+            background-color: #004953;
+            color: #fff;
         }
 
         form {
@@ -218,11 +235,55 @@ function getColumnNames($conn, $tableName) {
 
         legend {
             font-weight: bold;
+            color: #264348;
         }
 
         button {
             margin-bottom: 10px;
+            background-color:#004953 ;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
         }
+        button:hover {
+            background-color: #004040;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        #studentFields {
+            margin-top: 20px;
+        }
+
+        #updateForm input[type="submit"],
+        #updateForm input[type="button"] {
+            margin-top: 20px;
+        }
+
+        #updateForm label {
+            margin-top: 10px;
+        }
+        #credentialsForm input[type="submit"],
+        #credentialsForminput[type="button"] {
+            margin-top: 20px;
+        }
+
+        #credentialsForm label {
+            margin-top: 10px;
+        }
+
+        #profile {
+            padding-bottom: 20px; 
+        }
+
     </style>
 </head>
 
@@ -256,7 +317,7 @@ function getColumnNames($conn, $tableName) {
             // Fetch user profile fields dynamically
             $userDataSql = "SELECT * FROM users WHERE UIN = '$userUIN'";
             $userDataResult = $conn->query($userDataSql);
-            $nonEditableFields = ['UIN', 'DoB', 'First_name', 'M_initial', 'Last_name', 'Hispanic_latino', 'Race', 'First_generation' ];
+            $nonEditableFields = ['UIN', 'Passwords'];
 
 
             if ($userDataResult->num_rows > 0) {
@@ -273,7 +334,7 @@ function getColumnNames($conn, $tableName) {
                     }
 
 
-                    if ($field != 'Passwords' && $field != 'User_type' && $editable ) { // Exclude certain fields, adjust as needed
+                    if ( $field != 'User_type' && $editable ) { // Exclude certain fields, adjust as needed
                         echo '<label for="new' . $field . '">' . ucfirst($field) . ':</label>';
                         echo '<input type="text" id="new' . $field . '" name="new' . $field . '" value="' . $value . '"><br>';
                     }
@@ -368,6 +429,12 @@ function getColumnNames($conn, $tableName) {
                 var updateButton = document.getElementById("updateButton");
                 updateButton.style.display = "block"; // Show the "Update Personal Information" button
             }
+
+            if(profile.style.display === "none"){
+                var updateButton = document.getElementById("updateButton");
+                updateButton.style.display = "none"; 
+
+            }
         }
 
         function toggleUpdateForm() {
@@ -400,7 +467,7 @@ function getColumnNames($conn, $tableName) {
             var confirmation = confirm("Are you sure you want to deactivate your account?");
             if (confirmation) {
                 // If user clicks "Yes", submit the form and call removeAccess()
-                window.location.href = "student_page.php?deactivate=true";
+                window.location.href = "logout.php?deactivate=true";
             } else {
                 
             }
