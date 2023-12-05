@@ -1,12 +1,12 @@
 <!-- Made By Rishika Acharya -->
 <?php include_once 'db.php'; ?>
-<?php include_once 'Admin_App_nav.php'; ?> <!-- Include the navigation bar -->
+<?php include_once 'Student_App_nav.php'; ?> <!-- Include the navigation bar -->
 
 <!DOCTYPE html>
 <html>
 <body>
 
-<h1> Add a Student's Certification</h1>
+<h1> Apply for a Certification</h1>
 
 <!-- Display Form for Inserting/Updating Certification Enrollment Information -->
 <form method="post">
@@ -125,7 +125,7 @@ if (isset($_POST['insert'])) {
 ?>
 
 <!-- Table Itself-->
-<h1> All Certificates</h1>
+<h1> My Certificates</h1>
 <table>
     <tr>
         <th>Certification Enrollment Number</th>

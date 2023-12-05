@@ -60,12 +60,10 @@
 <h1>Dashboard</h1>
 
 <div class="buttonGrid">
-    <a class="dashboard-button" href="includes/intern.php">Internships</a>
-    <a class="dashboard-button" href="includes/intern_app.php">Intern Application</a>
-    <a class="dashboard-button" href="includes/classes.php">Classes</a>
-    <a class="dashboard-button" href="includes/class_enrollment.php">Class Application</a>
-    <a class="dashboard-button" href="includes/certificate.php">Certificate</a>
-    <a class="dashboard-button" href="includes/cert_enrollment.php">Certificate Application</a>
+    <a class="dashboard-button" href="student_applications.php">Program</a>
+    <a class="dashboard-button" href="includes/student_intern.php">InternShip</a>
+    <a class="dashboard-button" href="includes/student_certificate.php">Certificate</a>
+    <a class="dashboard-button" href="includes/student_classes.php">Classes</a>
 </div>
 
 

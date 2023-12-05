@@ -1,13 +1,13 @@
 <!-- Made By Rishika Acharya -->
 <?php include_once 'db.php'; ?>
-<?php include_once 'Admin_App_nav.php'; ?> <!-- Include the navigation bar -->
+<?php include_once 'Student_App_nav.php'; ?> <!-- Include the navigation bar -->
 
 <!DOCTYPE html>
 <html>
 
 <body>
 
-<h1>Add/Edit an Student's Internship</h1>
+<h1>Apply For An Internship</h1>
 
 <!-- Display Form for Inserting/Updating Internship Application Information -->
 <form method="post">
@@ -94,7 +94,7 @@ if (isset($_POST['insert'])) {
 ?>
 
 <!-- Table Itself-->
-<h1> ALl Internship Applications</h1>
+<h1> My Internship Applications</h1>
 <table>
     <tr>
         <th>Application Number</th>

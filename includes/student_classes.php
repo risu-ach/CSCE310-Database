@@ -1,13 +1,13 @@
 <!-- Made By Rishika Acharya -->
 <?php include_once 'db.php'; ?>
-<?php include_once 'Admin_App_nav.php'; ?> <!-- Include the navigation bar -->
+<?php include_once 'Student_App_nav.php'; ?> <!-- Include the navigation bar -->
 
 <!DOCTYPE html>
 <html>
 
 <body>
 
-<h1>Enroll a Student for a class</h1>
+<h1>Enroll for a class</h1>
 
 <!-- Display Form for Inserting/Updating Class Enrollment Information -->
 <form method="post">
@@ -107,7 +107,7 @@ if (isset($_POST['insert'])) {
 ?>
 
 <!-- Table Itself-->
-<h1> All Classes Applications</h1>
+<h1> My Classes</h1>
 <table>
     <tr>
         <th>Enrollment Number</th>
