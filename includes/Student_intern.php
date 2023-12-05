@@ -1,29 +1,36 @@
 <!-- Made By Rishika Acharya -->
 <?php include_once 'db.php'; ?>
-<?php include_once 'Admin_App_nav.php'; ?> <!-- Include the navigation bar -->
+<?php include_once 'Student_App_nav.php'; ?> <!-- Include the navigation bar -->
+<?php 
+session_start();
+// Check if the user is logged in
+if (!isset($_SESSION["userUIN"])) {
+    // If not, redirect to the login page
+    header("Location: ../loginpage.php");
+    exit();
+}
 
+$userUIN = $_SESSION["userUIN"];
+$userName = $_SESSION["userName"];
+
+?>
 <!DOCTYPE html>
 <html>
 
 <body>
 
-<h1>Add/Edit an Student's Internship</h1>
+<h1>Apply For An Internship</h1>
 
 <!-- Display Form for Inserting/Updating Internship Application Information -->
 <form method="post">
+    <?php $randomIANum = rand(1000, 9999); ?>
     <label for="IA_num">Application Number:</label>
-    <input type="text" name="IA_num" required>
+    <input type="text" name="IA_num" value="<?php echo $randomIANum; ?>" required>
     
+    <!-- Get UIN from college_student -->
     <label for="UIN">UIN:</label>
-    <select name="UIN" required>
-        <?php
-        $uinQuery = "SELECT UIN FROM college_student;";
-        $uinResult = mysqli_query($conn, $uinQuery);
-
-        while ($uinRow = mysqli_fetch_assoc($uinResult)) {
-            echo "<option value='" . $uinRow['UIN'] . "'>" . $uinRow['UIN'] . "</option>";
-        }
-        ?>
+    <select name="UIN" required disabled>
+        <option value="<?php echo $userUIN; ?>"><?php echo $userUIN; ?></option>
     </select>
     
     <label for="Intern_ID">Internship ID:</label>
@@ -63,7 +70,7 @@
 <?php
 if (isset($_POST['insert'])) {
     $IA_num = $_POST['IA_num'];
-    $UIN = $_POST['UIN'];
+    $UIN = $userUIN;
     $Intern_ID = isset($_POST['Intern_ID']) ? $_POST['Intern_ID'] : null;
     $Intern_status = isset($_POST['Intern_status']) ? $_POST['Intern_status'] : null;
     $Intern_year = isset($_POST['Intern_year']) ? $_POST['Intern_year'] : null;
@@ -94,7 +101,7 @@ if (isset($_POST['insert'])) {
 ?>
 
 <!-- Table Itself-->
-<h1> ALl Internship Applications</h1>
+<h1> My Internship Applications</h1>
 <table>
     <tr>
         <th>Application Number</th>
@@ -106,7 +113,7 @@ if (isset($_POST['insert'])) {
     </tr>
 
     <?php 
-      $selectSql = "SELECT * FROM intern_app;";
+      $selectSql = "SELECT * FROM intern_app  WHERE UIN = '$userUIN';";
       $selectResult = mysqli_query($conn, $selectSql);
       $resultCheck = mysqli_num_rows($selectResult);
 

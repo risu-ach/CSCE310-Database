@@ -1,30 +1,36 @@
 <!-- Made By Rishika Acharya -->
 <?php include_once 'db.php'; ?>
-<?php include_once 'Admin_App_nav.php'; ?> <!-- Include the navigation bar -->
+<?php include_once 'Student_App_nav.php'; ?> <!-- Include the navigation bar -->
+<?php 
+session_start();
+// Check if the user is logged in
+if (!isset($_SESSION["userUIN"])) {
+    // If not, redirect to the login page
+    header("Location: ../loginpage.php");
+    exit();
+}
 
+$userUIN = $_SESSION["userUIN"];
+$userName = $_SESSION["userName"];
+
+?>
 <!DOCTYPE html>
 <html>
 
 <body>
 
-<h1>Enroll a Student for a class</h1>
+<h1>Enroll for a class</h1>
 
 <!-- Display Form for Inserting/Updating Class Enrollment Information -->
 <form method="post">
+    <?php $randomCENum = rand(1000, 9999); ?>
     <label for="CE_num">Enrollment Number:</label>
-    <input type="text" name="CE_num" required>
-    
+    <input type="text" name="CE_num" value="<?php echo $randomCENum; ?>" required>
+
     <!-- Get UIN from college_student -->
     <label for="UIN">UIN:</label>
-    <select name="UIN" required>
-        <?php
-        $selectUINSql = "SELECT UIN FROM college_student;";
-        $selectUINResult = mysqli_query($conn, $selectUINSql);
-
-        while ($rowUIN = mysqli_fetch_array($selectUINResult)) {
-            echo "<option value='" . $rowUIN["UIN"] . "'>" . $rowUIN["UIN"] . "</option>";
-        }
-        ?>
+    <select name="UIN" required disabled>
+        <option value="<?php echo $userUIN; ?>"><?php echo $userUIN; ?></option>
     </select>
     
     <!-- Get Class_ID from classes -->
@@ -75,7 +81,7 @@
 <?php
 if (isset($_POST['insert'])) {
     $CE_num = $_POST['CE_num'];
-    $UIN = $_POST['UIN'];
+    $UIN = $userUIN;
     $class_ID = $_POST['class_ID'];
     $Class_status = $_POST['Class_status'];
     $Semester = $_POST['Semester'];
@@ -86,28 +92,28 @@ if (isset($_POST['insert'])) {
     $duplicateResult = mysqli_query($conn, $checkDuplicateSql);
 
     if (mysqli_num_rows($duplicateResult) > 0) {
-        echo "Updating Enrollment ID $CE_num ". "<br>";
-        $updateSql = "UPDATE class_enrollment SET UIN = '$UIN', class_ID = '$class_ID', Class_status = '$Class_status', Semester = '$Semester', Class_year = '$Class_year' WHERE CE_num = '$CE_num'";
 
+        $updateSql = "UPDATE class_enrollment SET UIN = '$UIN', class_ID = '$class_ID', Class_status = '$Class_status', Semester = '$Semester', Class_year = '$Class_year' WHERE CE_num = '$CE_num'";
         if (mysqli_query($conn, $updateSql)) {
-            echo "Class enrollment information updated successfully";
+            echo "Class Updated successfully";
         } else {
-            echo "Error updating class enrollment information: " . mysqli_error($conn);
+            echo "Error: " . $updateSql . "<br>" . mysqli_error($conn);
         }
     } else {
-        $insertSql = "INSERT INTO class_enrollment (CE_num, UIN, class_ID, Class_status, Semester, Class_year) VALUES ('$CE_num', '$UIN', '$class_ID', '$Class_status', '$Semester', '$Class_year')";
-
+        
+        $insertSql = "INSERT INTO class_enrollment (CE_num, UIN, class_ID, Class_status, Semester, Class_year) VALUES ('$CE_num', '$userUIN', '$class_ID', '$Class_status', '$Semester', '$Class_year')";
         if (mysqli_query($conn, $insertSql)) {
-            echo "New class enrollment inserted successfully";
+            echo "New Classe Enrolled successfully";
         } else {
             echo "Error: " . $insertSql . "<br>" . mysqli_error($conn);
         }
     }
+    
 }
 ?>
 
 <!-- Table Itself-->
-<h1> All Classes Applications</h1>
+<h1> My Classes</h1>
 <table>
     <tr>
         <th>Enrollment Number</th>
@@ -120,7 +126,8 @@ if (isset($_POST['insert'])) {
     </tr>
 
     <?php 
-      $selectSql = "SELECT * FROM class_enrollment;";
+      $selectSql = "SELECT * FROM class_enrollment WHERE UIN = '$userUIN';";
+      
       $selectResult = mysqli_query($conn, $selectSql);
       $resultCheck = mysqli_num_rows($selectResult);
 
