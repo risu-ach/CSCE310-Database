@@ -57,7 +57,7 @@
 </head>
 <body>
 
-<h1>Dashboard</h1>
+<h1>Admin Dashboard</h1>
 
 <div class="buttonGrid">
 <a class="dashboard-button" href="program.php">Program</a>
