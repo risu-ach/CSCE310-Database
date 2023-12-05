@@ -1,23 +1,68 @@
+<!-- Made By Rishika Acharya -->
 <?php include_once 'includes/db.php'; ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
         table {
             border-collapse: collapse;
             width: 100%;
         }
 
         th, td {
-            border: 1px solid #dddddd;
-            text-align: left;
+            border: 1px solid #ddd;
             padding: 8px;
+            text-align: left;
         }
 
         th {
             background-color: #f2f2f2;
         }
+
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
     </style>
 </head>
 <body>

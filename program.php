@@ -98,6 +98,7 @@ if (isset($_POST['insert'])) {
     ?>
 </table>
 
+<!-- Made By Rishika Acharya -->
 <!-- Handle Edit -->
 <?php
 if (isset($_GET['edit'])) {

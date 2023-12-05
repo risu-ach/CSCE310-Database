@@ -1,3 +1,4 @@
+<!-- Made By Rishika Acharya -->
 <?php include_once 'includes/db.php'; ?>
 
 <!DOCTYPE html>
