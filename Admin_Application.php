@@ -1,7 +1,15 @@
 <!-- Made By Rishika Acharya -->
 <?php include_once 'includes/db.php'; ?>
 <?php include_once 'admin_app_nav.php'; ?> <!-- Include the navigation bar -->
-
+<?php
+session_start();
+// Check if the user is logged in
+if (!isset($_SESSION["userUIN"])) {
+    // If not, redirect to the login page
+    header("Location: ../loginpage.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,8 +77,8 @@
     
     <a class="dashboard-button" href="includes/certificate.php">Certificate</a>
     <a class="dashboard-button" href="includes/cert_enrollment.php">Certificate Application</a>
-    <a class="dashboard-button" href="cc_event.php">Events</a>
-    <a class="dashboard-button" href="eventtrack.php">Event Tracking</a>
+    <a class="dashboard-button" href="includes/cc_event.php">Events</a>
+    <a class="dashboard-button" href="includes/eventtrack.php">Event Tracking</a>
     
     <a class="dashboard-button" href="logout.php">Logout</a>
 </div>

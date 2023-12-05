@@ -1,7 +1,15 @@
 <!-- Made By Rishika Acharya -->
 <?php include_once 'db.php'; ?>
 <?php include_once 'Admin_App_nav.php'; ?> <!-- Include the navigation bar -->
-
+<?php
+session_start();
+// Check if the user is logged in
+if (!isset($_SESSION["userUIN"])) {
+    // If not, redirect to the login page
+    header("Location: ../loginpage.php");
+    exit();
+}
+?>
 
 <!DOCTYPE html>
 <html>
