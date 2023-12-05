@@ -1,0 +1,82 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+    
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #004953;
+    color: #fff;
+}
+
+form {
+    margin-bottom: 20px;
+    display: none;
+}
+
+fieldset {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+legend {
+    font-weight: bold;
+    color: #264348;
+}
+
+button {
+    margin-bottom: 10px;
+    background-color:#004953 ;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+button:hover {
+    background-color: #004040;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+#studentFields {
+    margin-top: 20px;
+}
+
+#addUserForm input[type="submit"],
+#addUserForm input[type="button"] {
+    margin-top: 20px;
+}
+
+#addUserForm label {
+    margin-top: 10px;
+}
+
+/* Adjusted spacing for checkbox fields */
+#addUserForm input[type="checkbox"] {
+    margin-right: 5px;
+    vertical-align: middle;
+}
