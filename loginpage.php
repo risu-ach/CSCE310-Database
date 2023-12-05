@@ -1,19 +1,9 @@
 <?php
 
+include_once 'includes/db.php';
+
+
 session_start();
-// Database connection parameters
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "cs310";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 // Function to authenticate the user
 function authenticateUser($username, $password)
