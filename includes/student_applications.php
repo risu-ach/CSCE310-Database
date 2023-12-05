@@ -93,6 +93,43 @@ $userName = $_SESSION["userName"];
 		<button type="submit" name="submit">Submit</button>
 	</form>
 
+
+
+<!-- Table -->
+<h1> My Applications</h1>
+<table>
+    <tr>
+        <th>Application Number</th>
+        <th>Program Number</th>
+        <th>UIN</th>
+        <th>Uncompleted Certs</th>
+        <th>Completed Certs</th>
+        <th>Purpose Statement</th>
+    </tr>
+
+    <?php 
+      $selectSql = "SELECT * FROM application WHERE UIN = '$userUIN';";
+      $selectResult = mysqli_query($conn, $selectSql);
+      $resultCheck = mysqli_num_rows($selectResult);
+
+      if ($resultCheck > 0) {
+        while ($row = mysqli_fetch_array($selectResult)) {
+          echo "<tr>";
+          echo "<td>" . $row["App_num"] . "</td>";
+          echo "<td>" . $row["Program_num"] . "</td>";
+          echo "<td>" . $row["UIN"] . "</td>";
+          echo "<td>" . $row["Uncom_cert"] . "</td>";
+          echo "<td>" . $row["Com_cert"] . "</td>";
+          echo "<td>" . $row["Purpose_statement"] . "</td>";
+          echo "</tr>";
+        }
+      } else {
+        echo "<tr><td colspan='9'>No applications found</td></tr>";
+      }
+    ?>
+</table>
+
+
 	
 </body>
 </html>
