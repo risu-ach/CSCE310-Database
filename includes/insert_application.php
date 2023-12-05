@@ -11,5 +11,5 @@
 	VALUES ($num, $uin, '$uncom', '$com', '$purpose');";
 	mysqli_query($conn, $sql);
 
-	header("Location: ../student_applications.php?insert=success");
+	header("Location: student_applications.php?insert=success");
 ?>

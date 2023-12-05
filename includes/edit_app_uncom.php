@@ -7,5 +7,5 @@
 	$sql = "UPDATE application SET Uncom_cert = '$uncom' WHERE App_num = $appnum;";
 	mysqli_query($conn, $sql);
 
-	header("Location: ../student_applications.php?edit=success");
+	header("Location: student_applications.php?edit=success");
 ?>

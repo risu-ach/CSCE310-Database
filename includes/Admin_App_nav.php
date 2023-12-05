@@ -123,7 +123,7 @@
     <li class="navitem"><a href="intern.php">Intern</a></li>
     <li class="navitem"><a href="certificate.php">Certificate</a></li>
     <li class="navitem"><a href="classes.php">Classes</a></li>
-    <li class="navitem"><a href="../student_applications.php">Program Application</a></li>
+    <li class="navitem"><a href="student_applications.php">Program Application</a></li>
     <li class="navitem"><a href="intern_app.php">Intern Application</a></li>
     <li class="navitem"><a href="cert_enrollment.php">Certificate Application</a></li>
     <li class="navitem"><a href="class_enrollment.php">Classes Application</a></li>
