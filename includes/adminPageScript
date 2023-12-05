@@ -11,13 +11,11 @@ function cancelAddUser() {
 }
 
 function cancelUpdateStudent() {
-    var form = document.getElementById("updateStudentForm");
     document.getElementById('updateStudentForm').style.display = 'none';
 
 }
 
 function cancelUpdateAdmin() {
-    var form = document.getElementById("updateAdminForm");
     document.getElementById('updateAdminForm').style.display = 'none';
 
 }
