@@ -1,3 +1,4 @@
+/* Sarah Abusada:Functionality set 4 */
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
@@ -20,7 +21,7 @@ input {
 
 input[type="submit"] {
     padding: 10px;
-    background-color: #4CAF50;
+    background-color: grey;
     color: white;
     border: none;
     border-radius: 5px;
@@ -44,7 +45,7 @@ th {
 
 
 button {
-    background-color: #4CAF50;
+    background-color: grey;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -53,5 +54,5 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: grey;
 }

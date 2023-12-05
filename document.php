@@ -1,3 +1,4 @@
+<!-- Sarah Abusada:Functionality set 4 -->
 <?php 
 include_once 'includes/db.php';
 ?>

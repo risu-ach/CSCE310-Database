@@ -1,10 +1,11 @@
+<!-- Sarah Abusada:Functionality set 4 -->
+
 <?php 
 include_once 'includes/db.php';
 ?>
 
-
 <?php
-$connection = mysqli_connect("localhost", "root", "", "cs310");
+$connection = mysqli_connect("localhost", "root", "", "CSCE_310");
 
 if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
@@ -23,6 +24,7 @@ if (!$connection) {
     </head>
     <body>
 
+<!--- Function to update/edit an event!-->
 <?php
     if (isset($_POST["update"])) {
         $Event_ID = $_POST['Event_ID'];
@@ -48,7 +50,8 @@ if (!$connection) {
     $row = mysqli_fetch_assoc($result);
     ?>
 
-<form action="document.php">
+<!--- form to fill out information to edit/update an event!-->
+<form action="cc_event.php">
         <button type="submit"><b>Back</b></button>
     </form> 
 <form method='post' action="">

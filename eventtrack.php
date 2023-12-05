@@ -1,3 +1,4 @@
+<!-- Sarah Abusada:Functionality set 4 -->
 <?php 
 include_once 'includes/db.php';
 ?>
@@ -18,6 +19,9 @@ include_once 'includes/db.php';
     </form>     
     <h2>Events Tracking Table</h2>
 
+<!--- Creating the event tracking table!-->
+<!--- Event tracking table uses trigger from database to automatically get inserted, updated and 
+deleted when the corresponding function is carried out on the cc_event table-->
     <table>
     <tr>
         <th>ET Num</th>
@@ -44,66 +48,6 @@ else {
  ?> 
 </table>
 
-<!-- <h3>Add an event tracking</h3>
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-    <label for="ET_Num">ET Num:</label>
-    <input type="int" name="ET_Num" required>
+</body>
+</html>
 
-    <!-- Get UIN from college_student -->
-    <label for="UIN">UIN:</label>
-    <select name="UIN" required>
-        <?php
-        $selectUINSql = "SELECT UIN FROM cc_event;";
-        $selectUINResult = mysqli_query($conn, $selectUINSql);
-
-        while ($rowUIN = mysqli_fetch_array($selectUINResult)) {
-            echo "<option value='" . $rowUIN["UIN"] . "'>" . $rowUIN["UIN"] . "</option>";
-        }
-        ?>
-    </select>
-    <label for="Event_ID">Event_ID:</label>
-    <select name="Event_ID" required>
-        <?php
-        $selectEventIDSql = "SELECT Event_ID FROM cc_event;";
-        $selectEventIDResult = mysqli_query($conn, $selectEventIDSql);
-
-        while ($rowUIN = mysqli_fetch_array($selectEventIDResult)) {
-            echo "<option value='" . $rowUIN["Event_ID"] . "'>" . $rowUIN["Event_ID"] . "</option>";
-        }
-        ?>
-    </select>
-
-    <button type="submit" name="add">Add Event Tracking</button>
-    </form> -->
-
-    
-<!-- <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add"])) {
-    $ET_Num = $_POST['ET_Num'];
-    $Event_ID = $_POST['Event_ID'];
-    $UIN = $_POST['UIN'];
-"INSERT INTO event_tracking (ET_Num, UIN, Program_num) VALUES ('$ET_Num', '$UIN', '$Program_num')";
-        header("Location: ".$_SERVER['PHP_SELF']);
-        if ($conn->query($sql) === TRUE) {
-            echo "Data added successfully";
-        } else {
-            echo "Error adding data: " . $conn->error;
-    }
-}
-?> -->
-
-
-<!-- 
-<?php
-if (isset($_GET['delete'])) {
-    $delete = $_GET['delete'];
-
-    $deleteSql = "DELETE FROM event_tracking WHERE Event_ID = '$delete'";
-
-    if (mysqli_query($conn, $deleteSql)) {
-        echo "Event tracking deleted successfully";
-    } else {
-        echo "Error deleting event tracking: " . mysqli_error($conn);
-    }
-}
-?>
