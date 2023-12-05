@@ -118,6 +118,7 @@
 
 <!-- Navigation bar with three buttons -->
 <ul class="navbar">
+    <li class="navitem"><a href="../Admin_Application.php">Dashboard</a></li>
     <li class="navitem"><a href="../program.php">Program</a></li>
     <li class="navitem"><a href="intern.php">Intern</a></li>
     <li class="navitem"><a href="certificate.php">Certificate</a></li>
@@ -126,6 +127,10 @@
     <li class="navitem"><a href="intern_app.php">Intern Application</a></li>
     <li class="navitem"><a href="cert_enrollment.php">Certificate Application</a></li>
     <li class="navitem"><a href="class_enrollment.php">Classes Application</a></li>
+    <li class="navitem"><a href="cc_event.php">Events</a></li>
+    <li class="navitem"><a href="eventtrack.php">Event Tracking</a></li>
+    <li class="navitem"><a href="../logout.php">Logout</a></li>
+    
 
 </ul>
 

@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Admin Dashboard</title>
 
     <style>
         body {
@@ -26,7 +26,7 @@
 
         .buttonGrid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(6, 1fr);
             grid-auto-rows: auto;
             grid-gap: 20px;
             margin: auto;
@@ -60,17 +60,20 @@
 <h1>Admin Dashboard</h1>
 
 <div class="buttonGrid">
-<a class="dashboard-button" href="program.php">Program</a>
-<a class="dashboard-button" href="student_applications.php">Program Application</a>
+    <a class="dashboard-button" href="program.php">Program</a>
+    <a class="dashboard-button" href="student_applications.php">Program Application</a>
     <a class="dashboard-button" href="includes/intern.php">Internships</a>
     <a class="dashboard-button" href="includes/intern_app.php">Intern Application</a>
     <a class="dashboard-button" href="includes/classes.php">Classes</a>
     <a class="dashboard-button" href="includes/class_enrollment.php">Class Application</a>
+    
     <a class="dashboard-button" href="includes/certificate.php">Certificate</a>
     <a class="dashboard-button" href="includes/cert_enrollment.php">Certificate Application</a>
+    <a class="dashboard-button" href="cc_event.php">Events</a>
+    <a class="dashboard-button" href="eventtrack.php">Event Tracking</a>
+    
+    <a class="dashboard-button" href="logout.php">Logout</a>
 </div>
-
-
 
 </body>
 </html>

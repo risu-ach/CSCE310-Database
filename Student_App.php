@@ -64,6 +64,8 @@
     <a class="dashboard-button" href="includes/student_intern.php">InternShip</a>
     <a class="dashboard-button" href="includes/student_certificate.php">Certificate</a>
     <a class="dashboard-button" href="includes/student_classes.php">Classes</a>
+    <a class="dashboard-button" href="includes/document.php">Documents</a>
+    <a class="dashboard-button" href="logout.php">Logout</a>
 </div>
 
 

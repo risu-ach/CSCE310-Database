@@ -118,11 +118,12 @@
 
 <!-- Navigation bar with three buttons -->
 <ul class="navbar">
-<   <li class="navitem"> <a href="../student_applications.php">Program Application</a>
+   <li class="navitem"> <a href="../student_applications.php">Program Application</a>
     <li class="navitem"><a href="student_intern.php">Intern Application</a></li>
     <li class="navitem"><a href="student_certificate.php">Certificate Application</a></li>
     <li class="navitem"><a href="student_classes.php">Classes Application</a></li>
-
+    <li class="navitem"><a href="document.php">Documents</a></li>
+    <li class="navitem"><a href="logout.php">Logout</a></li>
 </ul>
 
 </body>
