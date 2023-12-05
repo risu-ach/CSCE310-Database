@@ -69,7 +69,7 @@ if (!isset($_SESSION["userUIN"])) {
 
 <div class="buttonGrid">
     <a class="dashboard-button" href="program.php">Program</a>
-    <a class="dashboard-button" href="includes/student_applications.php">Program Application</a>
+    <a class="dashboard-button" href="includes/admin_applications.php">Program Application</a>
     <a class="dashboard-button" href="includes/intern.php">Internships</a>
     <a class="dashboard-button" href="includes/intern_app.php">Intern Application</a>
     <a class="dashboard-button" href="includes/classes.php">Classes</a>
