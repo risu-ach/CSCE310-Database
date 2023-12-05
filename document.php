@@ -1,7 +1,17 @@
 <!-- Sarah Abusada:Functionality set 4 -->
+
 <?php 
 include_once 'includes/db.php';
+// if (!isset($_SESSION["userUIN"])) {
+//     // If not, redirect to the login page
+//     header("Location: login.php");
+//     header("Location: ../loginpage.php");
+//     exit();
+// }
+// $userUIN = $_SESSION["userUIN"];
+// $userName = $_SESSION["userName"];
 ?>
+
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -12,10 +22,28 @@ include_once 'includes/db.php';
         <title>Documentation</title>
     </head>
     <body>
-    <form action="index.php">
-        <button type="submit"><b>Home</b></button>
-    </form>     
+    <nav>
+            <a href="index_sa.php">Dashboard</a>
+            <a href="cc_event.php">Events</a>
+            <a href="eventtrack.php">Event Tracking</a>
+            <a href="document.php">Documents</a>
+        </nav>
+        <style>           
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: grey ;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            margin: 0 10px;
+        } 
+        </style>      
     <h2>Document Table</h2>
+
 
     <table>
     <tr>
@@ -24,11 +52,21 @@ include_once 'includes/db.php';
         <th>Link</th>
         <th>Document Type</th>
     </tr>
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+		<input type="int" name="UIN" placeholder="Student UIN">
+		<br>
+		<button type="submit" name="search">Submit</button>
+	</form>
 
-    <?php 
-     $sql = "SELECT * FROM document";
-     $result = mysqli_query($conn, $sql);
-     $resultCheck = mysqli_num_rows($result);
+
+
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["search"]))  {
+    $UIN = $_POST['UIN'];
+    $sql = "SELECT * FROM application_document_view where UIN = $UIN;";
+    $result = mysqli_query($conn, $sql);
+    $resultCheck = mysqli_num_rows($result);
     if ($resultCheck > 0){
     while ($row = mysqli_fetch_array($result)) {
             echo "<tr>";
@@ -45,6 +83,7 @@ include_once 'includes/db.php';
 else {
     echo "<tr><td colspan='4'>No documents found</td></tr>";
   }
+}
  ?> 
 </table>
 

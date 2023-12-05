@@ -14,9 +14,26 @@ include_once 'includes/db.php';
         <title>Track Events</title>
     </head>
     <body>
-    <form action="index.php">
-        <button type="submit"><b>Home</b></button>
-    </form>     
+    <nav>
+            <a href="index_sa.php">Dashboard</a>
+            <a href="cc_event.php">Events</a>
+            <a href="eventtrack.php">Event Tracking</a>
+            <a href="document.php">Documents</a>
+        </nav>
+        <style>           
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: grey ;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            margin: 0 10px;
+        } 
+        </style>      
     <h2>Events Tracking Table</h2>
 
 <!--- Creating the event tracking table!-->
@@ -30,7 +47,8 @@ deleted when the corresponding function is carried out on the cc_event table-->
     </tr>
 
     <?php 
-     $sql = "SELECT * FROM event_tracking";
+    $uin = $_POST["UIN"];
+    $sql = "SELECT * FROM event_tracking;";
      $result = mysqli_query($conn, $sql);
      $resultCheck = mysqli_num_rows($result);
     if ($resultCheck > 0){
@@ -47,6 +65,14 @@ else {
   }
  ?> 
 </table>
+
+<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+    
+     <input type="int" name="UIN" placeholder="Student UIN">
+     <br>
+     <button type="submit" name="search">Submit</button>
+</form>
+
 
 </body>
 </html>

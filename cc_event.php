@@ -9,7 +9,7 @@
 ?> 
 
 
-    <!DOCTYPE html>
+<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -18,11 +18,28 @@
         <link rel="stylesheet" href="style.css"> 
         <title>Events</title>
     </head>
-    <body>
-    <form action="index.php">
-        <button type="submit"><b>Home</b></button>
-    </form>     
-    <h2>Events Table</h2>
+        <body>
+        <nav>
+            <a href="index_sa.php">Dashboard</a>
+            <a href="cc_event.php">Events</a>
+            <a href="eventtrack.php">Event Tracking</a>
+            <a href="document.php">Documents</a>
+        </nav>
+        <style>           
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: grey ;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            margin: 0 10px;
+        } 
+        </style>   
+            <h2>Events Table</h2>
 
 <!--- Creating the events table-->
 
@@ -166,7 +183,6 @@ if (isset($_GET["delete"])) {
         <?php
         $selectProgramNumSql = "SELECT Program_num FROM cc_event;";
         $selectProgramNumResult = mysqli_query($conn, $selectProgramNumSql);
-
         while ($rowProgramNum = mysqli_fetch_array($selectProgramNumResult)) {
             echo "<option value='" . $rowProgramNum["Program_num"] . "'>" . $rowProgramNum["Program_num"] . "</option>";
         }

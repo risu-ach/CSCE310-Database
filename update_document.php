@@ -31,10 +31,10 @@ if (isset($_POST["update"])) {
     $App_num = $_POST['App_num'];
     $Link = $_POST['Link'];
     $Doc_type= $_POST['Doc_type'];
-    $uinToUpdate = $_POST['UIN'];
-    $check = "SELECT * FROM application_document_view WHERE UIN = '$uinToUpdate' AND App_num = '$App_num' ";
-    $resultCheck = $conn->query($check); 
-    if ($result->num_rows > 0) {
+    // $uinToUpdate = $_POST['UIN'];
+    // $check = "SELECT * FROM application_document_view WHERE UIN = '$uinToUpdate' AND App_num = '$App_num' ";
+    //$resultCheck = $conn->query($check); 
+    //if ($result->num_rows > 0) {
         $updateSql = "UPDATE document SET Link = '$Link', Doc_type = '$Doc_type' WHERE Doc_num = '$Doc_num' ";
         header("Location: document.php");
         if (mysqli_query($connection, $updateSql)) {
@@ -44,7 +44,7 @@ if (isset($_POST["update"])) {
         }
     } else {
         echo "This user does not have an application";
-    }
+    //
 }
 
 
@@ -59,9 +59,6 @@ $row = mysqli_fetch_assoc($result);
         <button type="submit"><b>Back</b></button>
     </form> 
 <form method='post' action="">
-    <label for="UIN">UIN: </label>
-    <input type="int" id="UIN" name="UIN" required>
- <input type='int' name='Doc_num' value="<?php echo $row['Doc_num']; ?>">
     <input type='hidden' name='Doc_num' value="<?php echo $row['Doc_num']; ?>">
     <input type='hidden' name='App_num' value="<?php echo $row['App_num']; ?>">
     Link: <input type='varchar' name='Link' value="<?php echo $row['Link']; ?>"><br>
