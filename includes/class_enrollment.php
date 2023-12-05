@@ -1,29 +1,13 @@
 <!-- Made By Rishika Acharya -->
-<?php include_once 'includes/db.php'; ?>
+<?php include_once 'db.php'; ?>
+<?php include_once 'Admin_App_nav.php'; ?> <!-- Include the navigation bar -->
 
 <!DOCTYPE html>
 <html>
-<head>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
 
-        th, td {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
-</head>
 <body>
 
-<h1>Enroll for class</h1>
+<h1>Enroll for a class</h1>
 
 <!-- Display Form for Inserting/Updating Class Enrollment Information -->
 <form method="post">
@@ -83,7 +67,8 @@
         ?>
     </select>
     
-    <button type="submit" name="insert">Insert/Update Class Enrollment</button>
+    <button type="submit" name="insert" class="button">Insert/Update Internship</button>
+    <button type="button" onclick="clearForm()" class="button clear-button">Clear</button>
 </form>
 
 <!-- Handle Insert/Update -->
@@ -122,6 +107,7 @@ if (isset($_POST['insert'])) {
 ?>
 
 <!-- Table Itself-->
+<h1> All Classes</h1>
 <table>
     <tr>
         <th>Enrollment Number</th>
@@ -147,7 +133,7 @@ if (isset($_POST['insert'])) {
           echo "<td>" . $row["Class_status"] . "</td>";
           echo "<td>" . $row["Semester"] . "</td>";
           echo "<td>" . $row["Class_year"] . "</td>";
-          echo "<td><a href='?edit=" . $row["CE_num"] . "'>Edit</a> | <a href='?delete=" . $row["CE_num"] . "'>Delete</a></td>";
+          echo "<td><button onclick=\"location.href='?edit=" . $row["CE_num"] . "'\">Edit</button> | <button onclick=\"location.href='?delete=" . $row["CE_num"] . "'\">Delete</button></td>";
           echo "</tr>";
         }
       } else {
@@ -195,6 +181,18 @@ if (isset($_GET['delete'])) {
     }
 }
 ?>
+<script>
+    function clearForm() {
+        document.getElementsByName('CE_num')[0].value = '';
+        document.getElementsByName('UIN')[0].value = '';
+        document.getElementsByName('class_ID')[0].value = '';
+        document.getElementsByName('Class_status')[0].value = '';
+        document.getElementsByName('Semester')[0].value = '';
+        document.getElementsByName('Class_year')[0].value = '';
+
+    }
+</script>
+
 
 </body>
 </html>

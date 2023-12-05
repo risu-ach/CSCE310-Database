@@ -1,73 +1,13 @@
 <!-- Made By Rishika Acharya -->
-<?php include_once 'includes/db.php'; ?>
+<?php include_once 'db.php'; ?>
+<?php include_once 'Admin_App_nav.php'; ?> <!-- Include the navigation bar -->
 
 <!DOCTYPE html>
 <html>
-<head>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
 
-        form {
-            max-width: 400px;
-            margin: auto;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-        }
-
-        input[type="submit"] {
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-    </style>
-</head>
 <body>
 
-<h1>Internship Applications</h1>
+<h1>Apply For An Internship</h1>
 
 <!-- Display Form for Inserting/Updating Internship Application Information -->
 <form method="post">
@@ -115,7 +55,8 @@
         ?>
     </select>
     
-    <button type="submit" name="insert">Insert/Update Internship Application</button>
+    <button type="submit" name="insert" class="button">Insert/Update Internship</button>
+    <button type="button" onclick="clearForm()" class="button clear-button">Clear</button>
 </form>
 
 <!-- Handle Insert/Update -->
@@ -153,6 +94,7 @@ if (isset($_POST['insert'])) {
 ?>
 
 <!-- Table Itself-->
+<h1> My Internship Applications</h1>
 <table>
     <tr>
         <th>Application Number</th>
@@ -176,7 +118,7 @@ if (isset($_POST['insert'])) {
           echo "<td>" . ($row["Intern_ID"] ? $row["Intern_ID"] : 'NULL') . "</td>";
           echo "<td>" . ($row["Intern_status"] ? $row["Intern_status"] : 'NULL') . "</td>";
           echo "<td>" . ($row["Intern_year"] ? $row["Intern_year"] : 'NULL') . "</td>";
-          echo "<td><a href='?edit=" . $row["IA_num"] . "'>Edit</a> | <a href='?delete=" . $row["IA_num"] . "'>Delete</a></td>";
+          echo "<td><button onclick=\"location.href='?edit=" . $row["IA_num"] . "'\">Edit</button> | <button onclick=\"location.href='?delete=" . $row["IA_num"] . "'\">Delete</button></td>";
           echo "</tr>";
         }
       } else {
@@ -224,6 +166,16 @@ if (isset($_GET['delete'])) {
     }
 }
 ?>
+<script>
+    function clearForm() {
+        document.getElementsByName('IA_num')[0].value = '';
+                document.getElementsByName('UIN')[0].value = '';
+                document.getElementsByName('Intern_ID')[0].value = '';
+                document.getElementsByName('Intern_status')[0].value = '';
+                document.getElementsByName('Intern_year')[0].value = '';
+   
+    }
+</script>
 
 </body>
 </html>
