@@ -39,7 +39,7 @@ function authenticateUser($username, $password)
                 header("Location: admin_page.php");
             } elseif ($row['User_type'] == 'student') {
                 header("Location: student_page.php");
-            } elseif($row['User_type'] == 'No Access') {
+            } elseif($row['User_type'] == 'No Access Student' || $row['User_type'] == 'No Access Admin') {
                 echo "Access Denied";
             }
             else{
