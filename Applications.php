@@ -65,7 +65,7 @@
     <a class="dashboard-button" href="includes/classes.php">Classes</a>
     <a class="dashboard-button" href="includes/class_enrollment.php">Class Application</a>
     <a class="dashboard-button" href="includes/certificate.php">Certificate</a>
-    <a class="dashboard-button" href="cert_enrollment.php">Certificate Application</a>
+    <a class="dashboard-button" href="includes/cert_enrollment.php">Certificate Application</a>
 </div>
 
 
