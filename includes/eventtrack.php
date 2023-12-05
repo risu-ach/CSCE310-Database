@@ -1,6 +1,7 @@
 <!-- Sarah Abusada:Functionality set 4 -->
 <?php 
-include_once 'includes/db.php';
+include_once 'db.php';
+include_once 'admin_app_nav.php'; 
 ?>
 
 
@@ -19,7 +20,7 @@ include_once 'includes/db.php';
             <a href="cc_event.php">Events</a>
             <a href="eventtrack.php">Event Tracking</a>
             <a href="document.php">Documents</a>
-        </nav>
+        <!-- </nav>
         <style>           
         nav {
             display: flex;
@@ -33,7 +34,7 @@ include_once 'includes/db.php';
             padding: 10px;
             margin: 0 10px;
         } 
-        </style>      
+        </style>       -->
     <h2>Events Tracking Table</h2>
 
 <!--- Creating the event tracking table!-->
@@ -47,7 +48,7 @@ deleted when the corresponding function is carried out on the cc_event table-->
     </tr>
 
     <?php 
-    $uin = $_POST["UIN"];
+    //$uin = $_POST["UIN"];
     $sql = "SELECT * FROM event_tracking;";
      $result = mysqli_query($conn, $sql);
      $resultCheck = mysqli_num_rows($result);
@@ -66,12 +67,12 @@ else {
  ?> 
 </table>
 
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+<!-- <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
     
      <input type="int" name="UIN" placeholder="Student UIN">
      <br>
      <button type="submit" name="search">Submit</button>
-</form>
+</form> -->
 
 
 </body>

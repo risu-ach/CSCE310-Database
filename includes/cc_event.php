@@ -1,7 +1,8 @@
 <!-- Sarah Abusada:Functionality set 4 -->
 
 <?php 
-    include_once 'includes/db.php';
+    include_once 'db.php';
+    include_once 'admin_app_nav.php'; 
     $sql = "SELECT * FROM cc_event";
     $result = mysqli_query($conn, $sql);
     $resultCheck = mysqli_num_rows($result);
@@ -19,7 +20,7 @@
         <title>Events</title>
     </head>
         <body>
-        <nav>
+        <!-- <nav>
             <a href="index_sa.php">Dashboard</a>
             <a href="cc_event.php">Events</a>
             <a href="eventtrack.php">Event Tracking</a>
@@ -38,7 +39,7 @@
             padding: 10px;
             margin: 0 10px;
         } 
-        </style>   
+        </style>    -->
             <h2>Events Table</h2>
 
 <!--- Creating the events table-->

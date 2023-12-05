@@ -1,7 +1,8 @@
 <!-- Sarah Abusada:Functionality set 4 -->
 
 <?php 
-include_once 'includes/db.php';
+include_once 'db.php';
+include_once 'Student_App_nav.php';
 // if (!isset($_SESSION["userUIN"])) {
 //     // If not, redirect to the login page
 //     header("Location: login.php");
@@ -22,7 +23,7 @@ include_once 'includes/db.php';
         <title>Documentation</title>
     </head>
     <body>
-    <nav>
+    <!-- <nav>
             <a href="index_sa.php">Dashboard</a>
             <a href="cc_event.php">Events</a>
             <a href="eventtrack.php">Event Tracking</a>
@@ -41,7 +42,7 @@ include_once 'includes/db.php';
             padding: 10px;
             margin: 0 10px;
         } 
-        </style>      
+        </style>       -->
     <h2>Document Table</h2>
 
 

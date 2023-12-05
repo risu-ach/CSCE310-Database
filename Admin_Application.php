@@ -69,8 +69,8 @@
     
     <a class="dashboard-button" href="includes/certificate.php">Certificate</a>
     <a class="dashboard-button" href="includes/cert_enrollment.php">Certificate Application</a>
-    <a class="dashboard-button" href="cc_event.php">Events</a>
-    <a class="dashboard-button" href="eventtrack.php">Event Tracking</a>
+    <a class="dashboard-button" href="includes/cc_event.php">Events</a>
+    <a class="dashboard-button" href="includes/eventtrack.php">Event Tracking</a>
     
     <a class="dashboard-button" href="logout.php">Logout</a>
 </div>

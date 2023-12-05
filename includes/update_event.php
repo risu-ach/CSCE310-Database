@@ -1,7 +1,7 @@
 <!-- Sarah Abusada:Functionality set 4 -->
 
 <?php 
-include_once 'includes/db.php';
+include_once 'db.php';
 ?>
 
 <?php
