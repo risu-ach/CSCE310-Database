@@ -6,7 +6,7 @@ session_start();
 // Check if the user is logged in
 if (!isset($_SESSION["userUIN"])) {
     // If not, redirect to the login page
-    header("Location: login.php");
+    header("Location: ../loginpage.php");
     exit();
 }
 
