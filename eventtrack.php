@@ -44,7 +44,7 @@ else {
  ?> 
 </table>
 
-<h3>Add an event tracking</h3>
+<!-- <h3>Add an event tracking</h3>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
     <label for="ET_Num">ET Num:</label>
     <input type="int" name="ET_Num" required>
@@ -74,10 +74,10 @@ else {
     </select>
 
     <button type="submit" name="add">Add Event Tracking</button>
-    </form>
+    </form> -->
 
     
-<?php
+<!-- <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add"])) {
     $ET_Num = $_POST['ET_Num'];
     $Event_ID = $_POST['Event_ID'];
@@ -90,10 +90,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add"])) {
             echo "Error adding data: " . $conn->error;
     }
 }
-?>
+?> -->
 
 
-
+<!-- 
 <?php
 if (isset($_GET['delete'])) {
     $delete = $_GET['delete'];

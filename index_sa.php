@@ -5,11 +5,6 @@
     //session_unset(); //detletes all session data
     include_once 'includes/dbh.inc.php';
     //include_once 'update_event.php';
-    if(!isset($_COOKIE["user_id"])) {
-        $login_message = "You are not logged in";
-      } else {
-        //$login_message = "You are logged in as: " . getUser();
-      }
 
     $sql = "SELECT * FROM cc_event_view";
     $result = mysqli_query($conn, $sql);
