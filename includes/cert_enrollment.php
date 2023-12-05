@@ -1,29 +1,12 @@
 <!-- Made By Rishika Acharya -->
-<?php include_once 'includes/db.php'; ?>
+<?php include_once 'db.php'; ?>
+<?php include_once 'Admin_App_nav.php'; ?> <!-- Include the navigation bar -->
 
 <!DOCTYPE html>
 <html>
-<head>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        th, td {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
-</head>
 <body>
 
-<h1>Certification Enrollment</h1>
+<h1> Apply for a Certification</h1>
 
 <!-- Display Form for Inserting/Updating Certification Enrollment Information -->
 <form method="post">
@@ -100,7 +83,8 @@
         ?>
     </select>
     
-    <button type="submit" name="insert">Insert/Update Certification Enrollment</button>
+    <button type="submit" name="insert" class="button">Insert/Update Internship</button>
+    <button type="button" onclick="clearForm()" class="button clear-button">Clear</button>
 </form>
 
 <!-- Handle Insert/Update -->
@@ -141,6 +125,7 @@ if (isset($_POST['insert'])) {
 ?>
 
 <!-- Table Itself-->
+<h1> All Certificates</h1>
 <table>
     <tr>
         <th>Certification Enrollment Number</th>
@@ -170,7 +155,7 @@ if (isset($_POST['insert'])) {
           echo "<td>" . $row["Program_num"] . "</td>";
           echo "<td>" . $row["Semester"] . "</td>";
           echo "<td>" . $row["Cert_year"] . "</td>";
-          echo "<td><a href='?edit=" . $row["CertE_num"] . "'>Edit</a> | <a href='?delete=" . $row["CertE_num"] . "'>Delete</a></td>";
+          echo "<td><button onclick=\"location.href='?edit=" . $row["CertE_num"] . "'\">Edit</button> | <button onclick=\"location.href='?delete=" . $row["CertE_num"] . "'\">Delete</button></td>";
           echo "</tr>";
         }
       } else {
@@ -221,6 +206,19 @@ if (isset($_GET['delete'])) {
     }
 }
 ?>
+<script>
+    function clearForm() {
+        document.getElementsByName('CertE_num')[0].value = '';
+        document.getElementsByName('UIN')[0].value = '';
+        document.getElementsByName('Cert_ID')[0].value = '';
+        document.getElementsByName('Cert_status')[0].value = '';
+        document.getElementsByName('Training_status')[0].value = '';
+        document.getElementsByName('Program_num')[0].value = '';
+        document.getElementsByName('Semester')[0].value = '';
+        document.getElementsByName('Cert_year')[0].value = '';
+            
+    }
+</script>
 
 </body>
 </html>

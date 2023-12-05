@@ -1,29 +1,16 @@
 <!-- Made By Rishika Acharya -->
-<?php include_once 'includes/db.php'; ?>
+<?php include_once 'db.php'; ?>
+<?php include_once 'Admin_App_nav.php'; ?> <!-- Include the navigation bar -->
+
 
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
 
-        th, td {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
 </head>
 <body>
 
-<h1>Internship Table</h1>
+<h1> Add New Internship </h1>
 
 <!-- Display Form for Inserting/Updating Internship Information -->
 <form method="post">
@@ -42,7 +29,8 @@
         <option value="0">No</option>
     </select>
     
-    <button type="submit" name="insert">Insert/Update Internship</button>
+    <button type="submit" name="insert" class="button">Insert/Update Internship</button>
+    <button type="button" onclick="clearForm()" class="button clear-button">Clear</button>
 </form>
 
 <!-- Handle Insert/Update -->
@@ -80,6 +68,7 @@ if (isset($_POST['insert'])) {
 
 
 <!-- Table Itself-->
+<h1> ALL Internships</h1>
 <table>
     <tr>
         <th>Internship ID</th>
@@ -101,7 +90,7 @@ if (isset($_POST['insert'])) {
           echo "<td>" . ($row["Name"] ? $row["Name"] : 'NULL') . "</td>";
           echo "<td>" . ($row["Description"] !== null ? $row["Description"] : 'NULL') . "</td>";
           echo "<td>" . ($row["Is_Gov"] ? 'Yes' : 'No') . "</td>";
-          echo "<td><a href='?edit=" . $row["Intern_ID"] . "'>Edit</a> | <a href='?delete=" . $row["Intern_ID"] . "'>Delete</a></td>";
+          echo "<td><button onclick=\"location.href='?edit=" . $row["Intern_ID"] . "'\">Edit</button> | <button onclick=\"location.href='?delete=" . $row["Intern_ID"] . "'\">Delete</button></td>";
           echo "</tr>";
         }
       } else {
@@ -148,6 +137,14 @@ if (isset($_GET['delete'])) {
     }
 }
 ?>
+<script>
+    function clearForm() {
+        document.getElementsByName('Intern_ID')[0].value = '';
+        document.getElementsByName('Name')[0].value = '';
+        document.getElementsByName('Description')[0].value = '';
+        document.getElementsByName('Is_Gov')[0].value = '1';
+    }
+</script>
 
 </body>
 </html>

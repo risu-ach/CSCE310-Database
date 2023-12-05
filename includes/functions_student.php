@@ -129,7 +129,7 @@ function updateProfileFields($userUIN, $formData, $conn)
 
 }
 
-function displayStudentInfo(){
+function displayStudentInfo($userUIN,$conn){
     // Fetch user profile fields dynamically
     $userDataSql = "SELECT * FROM users WHERE UIN = '$userUIN'";
     $userDataResult = $conn->query($userDataSql);
