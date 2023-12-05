@@ -1,6 +1,6 @@
 <?php 
 
-    include_once 'includes/dbh.inc.php';
+    include_once 'includes/db.php';
 
     $sql = "SELECT * FROM cc_event";
     $result = mysqli_query($conn, $sql);

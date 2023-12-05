@@ -3,7 +3,7 @@
     //$_SESSION["username"] = "Krossing";
     //session_destroy();
     //session_unset(); //detletes all session data
-    include_once 'includes/dbh.inc.php';
+    include_once 'includes/db.php';
     //include_once 'update_event.php';
 
     $sql = "SELECT * FROM cc_event_view";
