@@ -2,7 +2,6 @@
 include_once 'includes/db.php';
 include_once 'includes/functions_student';
 session_start();
-
 // Check if the user is logged in
 if (!isset($_SESSION["userUIN"])) {
     // If not, redirect to the login page
@@ -18,6 +17,7 @@ $userName = $_SESSION["userName"];
 
 function displayMessage(message) {
     alert(message);
+    window.location.href = "student_page.php";
 }
 
 </script>
@@ -33,6 +33,7 @@ function displayMessage(message) {
     <title>Student Page</title>
     
 </head>
+
 
 <body>
 
