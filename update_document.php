@@ -3,7 +3,7 @@ include_once 'includes/dbh.inc.php';
 ?> -->
 
 <?php
-$connection = mysqli_connect("localhost", "root", "", "310_project");
+$connection = mysqli_connect("localhost", "root", "", "cs310");
 
 if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
