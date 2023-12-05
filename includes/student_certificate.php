@@ -1,6 +1,19 @@
 <!-- Made By Rishika Acharya -->
 <?php include_once 'db.php'; ?>
 <?php include_once 'Student_App_nav.php'; ?> <!-- Include the navigation bar -->
+<?php 
+session_start();
+// Check if the user is logged in
+if (!isset($_SESSION["userUIN"])) {
+    // If not, redirect to the login page
+    header("Location: login.php");
+    exit();
+}
+
+$userUIN = $_SESSION["userUIN"];
+$userName = $_SESSION["userName"];
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -10,19 +23,13 @@
 
 <!-- Display Form for Inserting/Updating Certification Enrollment Information -->
 <form method="post">
+    <?php $randomCENum = rand(1000, 9999); ?>
     <label for="CertE_num">Certification Enrollment Number:</label>
-    <input type="text" name="CertE_num" required>
+    <input type="text" name="CertE_num" value="<?php echo $randomCENum; ?>" required>
     
     <label for="UIN">UIN:</label>
-    <select name="UIN" required>
-        <?php
-        $uinQuery = "SELECT UIN FROM college_student;";
-        $uinResult = mysqli_query($conn, $uinQuery);
-
-        while ($uinRow = mysqli_fetch_assoc($uinResult)) {
-            echo "<option value='" . $uinRow['UIN'] . "'>" . $uinRow['UIN'] . "</option>";
-        }
-        ?>
+    <select name="UIN" required disabled>
+        <option value="<?php echo $userUIN; ?>"><?php echo $userUIN; ?></option>
     </select>
     
     <label for="Cert_ID">Certification ID:</label>
@@ -91,7 +98,7 @@
 <?php
 if (isset($_POST['insert'])) {
     $CertE_num = $_POST['CertE_num'];
-    $UIN = $_POST['UIN'];
+    $UIN = $userUIN;
     $Cert_ID = $_POST['Cert_ID'];
     $Cert_status = $_POST['Cert_status'];
     $Training_status = $_POST['Training_status'];
@@ -140,7 +147,7 @@ if (isset($_POST['insert'])) {
     </tr>
 
     <?php 
-      $selectSql = "SELECT * FROM cert_enrollment;";
+      $selectSql = "SELECT * FROM cert_enrollment WHERE UIN = '$userUIN';";
       $selectResult = mysqli_query($conn, $selectSql);
       $resultCheck = mysqli_num_rows($selectResult);
 
