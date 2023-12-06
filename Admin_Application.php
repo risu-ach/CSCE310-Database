@@ -79,7 +79,7 @@ if (!isset($_SESSION["userUIN"])) {
     <a class="dashboard-button" href="includes/cert_enrollment.php">Certificate Application</a>
     <a class="dashboard-button" href="includes/cc_event.php">Events</a>
     <a class="dashboard-button" href="includes/eventtrack.php">Event Tracking</a>
-    
+    <a class="dashboard-button" href="admin_page.php">Account Info</a>
     <a class="dashboard-button" href="logout.php">Logout</a>
 </div>
 

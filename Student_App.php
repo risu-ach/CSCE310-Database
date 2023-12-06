@@ -73,6 +73,7 @@ if (!isset($_SESSION["userUIN"])) {
     <a class="dashboard-button" href="includes/student_certificate.php">Certificate</a>
     <a class="dashboard-button" href="includes/student_classes.php">Classes</a>
     <a class="dashboard-button" href="includes/document.php">Documents</a>
+    <a class="dashboard-button" href="student_page.php">Account Info</a>
     <a class="dashboard-button" href="logout.php">Logout</a>
 </div>
 
