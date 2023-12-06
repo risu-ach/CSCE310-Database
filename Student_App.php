@@ -1,6 +1,5 @@
 <!-- Made By Rishika Acharya -->
 <?php include_once 'includes/db.php'; ?>
-<?php include_once 'admin_app_nav.php'; ?> <!-- Include the navigation bar -->
 <?php 
 session_start();
 // Check if the user is logged in
