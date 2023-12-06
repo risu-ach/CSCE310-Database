@@ -26,7 +26,7 @@ function authenticateUser($username, $password)
             $_SESSION['userName'] = $row['First_name'];
             // Password is correct, redirect to the appropriate page based on user_type
             if ($row['User_type'] == 'admin') {
-                header("Location: Admin_Application.php");
+                header("Location: Admin_App.php");
             } elseif ($row['User_type'] == 'student') {
                 header("Location: Student_App.php");
             } elseif($row['User_type'] == 'No Access Student' || $row['User_type'] == 'No Access Admin') {
