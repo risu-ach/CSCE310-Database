@@ -118,7 +118,7 @@
 
 <!-- Navigation bar with three buttons -->
 <ul class="navbar">
-    <li class="navitem"><a href="../Admin_Application.php">Back</a></li>
+    <li class="navitem"><a href="../Admin_App.php">Back</a></li>
     <li class="navitem"><a href="../program.php">Program</a></li>
     <li class="navitem"><a href="intern.php">Intern</a></li>
     <li class="navitem"><a href="certificate.php">Certificate</a></li>
