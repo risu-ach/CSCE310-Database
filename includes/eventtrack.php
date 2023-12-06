@@ -19,15 +19,10 @@ if (!isset($_SESSION["userUIN"])) {
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css"> 
+        <!--<link rel="stylesheet" href="style.css"> -->
         <title>Track Events</title>
     </head>
     <body>
-    <nav>
-            <a href="index_sa.php">Dashboard</a>
-            <a href="cc_event.php">Events</a>
-            <a href="eventtrack.php">Event Tracking</a>
-            <a href="document.php">Documents</a>
     <h2>Events Tracking Table</h2>
 
 <!--- Creating the event tracking table!-->
