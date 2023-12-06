@@ -9,7 +9,18 @@ if (!isset($_SESSION["userUIN"])) {
     header("Location: ../loginpage.php");
     exit();
 }
+// Initialize filter variables
+$filter_UIN = '';
+$filter_Class_ID = '';
+$filter_Class_status = '';
+// Process filters if the form is submitted
+if (isset($_POST['apply_filters'])) {
+    $filter_UIN = $_POST['filter_UIN'];
+    $filter_Class_ID = $_POST['filter_Class_ID'];
+    $filter_Class_status = $_POST['filter_Class_status'];
+}
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -75,9 +86,10 @@ if (!isset($_SESSION["userUIN"])) {
         ?>
     </select>
     
-    <button type="submit" name="insert" class="button">Insert/Update Internship</button>
+    <button type="submit" name="insert" class="button">Insert/Update Classes</button>
     <button type="button" onclick="clearForm()" class="button clear-button">Clear</button>
 </form>
+
 
 <!-- Handle Insert/Update -->
 <?php
@@ -113,6 +125,47 @@ if (isset($_POST['insert'])) {
     }
 }
 ?>
+<!-- Filter Form -->
+<form method="post">
+    <label for="filter_UIN">Filter by UIN:</label>
+    <select name="filter_UIN">
+        <option value="">All</option>
+        <?php
+        $selectUINSql = "SELECT UIN FROM college_student;";
+        $selectUINResult = mysqli_query($conn, $selectUINSql);
+
+        while ($rowUIN = mysqli_fetch_array($selectUINResult)) {
+            $selected = ($filter_UIN == $rowUIN["UIN"]) ? 'selected' : '';
+            echo "<option value='" . $rowUIN["UIN"] . "' $selected>" . $rowUIN["UIN"] . "</option>";
+        }
+        ?>
+    </select>
+
+    <label for="filter_Class_ID">Filter by Class ID:</label>
+    <select name="filter_Class_ID">
+        <option value="">All</option>
+        <?php
+        $selectClassIDSql = "SELECT Class_ID FROM classes;";
+        $selectClassIDResult = mysqli_query($conn, $selectClassIDSql);
+
+        while ($rowClassID = mysqli_fetch_array($selectClassIDResult)) {
+            $selected = ($filter_Class_ID == $rowClassID["Class_ID"]) ? 'selected' : '';
+            echo "<option value='" . $rowClassID["Class_ID"] . "' $selected>" . $rowClassID["Class_ID"] . "</option>";
+        }
+        ?>
+    </select>
+
+    <label for="filter_Class_status">Filter by Class Status:</label>
+    <select name="filter_Class_status">
+        <option value="">All</option>
+        <option value="On process" <?php echo ($filter_Class_status == 'On process') ? 'selected' : ''; ?>>On process</option>
+        <option value="completed" <?php echo ($filter_Class_status == 'completed') ? 'selected' : ''; ?>>Completed</option>
+        <option value="Dropped" <?php echo ($filter_Class_status == 'Dropped') ? 'selected' : ''; ?>>Dropped</option>
+    </select>
+
+    <button type="submit" name="apply_filters" class="button">Apply Filters</button>
+    <button type="button" onclick="clearFilters()" class="button clear-button">Clear Filters</button>
+</form>
 
 <!-- Table Itself-->
 <h1> All Classes Applications</h1>
@@ -128,7 +181,18 @@ if (isset($_POST['insert'])) {
     </tr>
 
     <?php 
-      $selectSql = "SELECT * FROM class_enrollment;";
+      // Construct SQL query based on filters
+      $selectSql = "SELECT * FROM class_enrollment WHERE 1";
+      if (!empty($filter_UIN)) {
+          $selectSql .= " AND UIN = '$filter_UIN'";
+      }
+      if (!empty($filter_Class_ID)) {
+          $selectSql .= " AND class_ID = '$filter_Class_ID'";
+      }
+      if (!empty($filter_Class_status)) {
+          $selectSql .= " AND Class_status = '$filter_Class_status'";
+      }
+
       $selectResult = mysqli_query($conn, $selectSql);
       $resultCheck = mysqli_num_rows($selectResult);
 
@@ -198,6 +262,12 @@ if (isset($_GET['delete'])) {
         document.getElementsByName('Semester')[0].value = '';
         document.getElementsByName('Class_year')[0].value = '';
 
+    }
+    function clearFilters() {
+        document.getElementsByName('filter_UIN')[0].value = '';
+        document.getElementsByName('filter_Class_ID')[0].value = '';
+        document.getElementsByName('filter_Class_status')[0].value = '';
+        document.forms[0].submit(); // Submit the form after clearing filters
     }
 </script>
 

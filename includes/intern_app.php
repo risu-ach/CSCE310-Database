@@ -1,6 +1,25 @@
 <!-- Made By Rishika Acharya -->
 <?php include_once 'db.php'; ?>
 <?php include_once 'Admin_App_nav.php'; ?> <!-- Include the navigation bar -->
+<?php
+session_start();
+// Check if the user is logged in
+if (!isset($_SESSION["userUIN"])) {
+    // If not, redirect to the login page
+    header("Location: ../loginpage.php");
+    exit();
+}
+// Initialize filter variables
+$filter_UIN = '';
+$filter_Class_ID = '';
+$filter_Class_status = '';
+// Process filters if the form is submitted
+if (isset($_POST['apply_filters'])) {
+    $filter_UIN = $_POST['filter_UIN'];
+    $filter_Class_ID = $_POST['filter_Class_ID'];
+    $filter_Class_status = $_POST['filter_Class_status'];
+}
+?>
 
 <!DOCTYPE html>
 <html>
@@ -92,9 +111,50 @@ if (isset($_POST['insert'])) {
     }
 }
 ?>
+<!-- Filter Form -->
+<form method="post">
+    <label for="filter_UIN">Filter by UIN:</label>
+    <select name="filter_UIN">
+        <option value="">All</option>
+        <?php
+        $selectUINSql = "SELECT UIN FROM college_student;";
+        $selectUINResult = mysqli_query($conn, $selectUINSql);
+
+        while ($rowUIN = mysqli_fetch_array($selectUINResult)) {
+            $selected = ($filter_UIN == $rowUIN["UIN"]) ? 'selected' : '';
+            echo "<option value='" . $rowUIN["UIN"] . "' $selected>" . $rowUIN["UIN"] . "</option>";
+        }
+        ?>
+    </select>
+
+    <label for="filter_Internship_ID">Filter by Internship ID:</label>
+    <select name="filter_Internship_ID">
+        <option value="">All</option>
+        <?php
+        $selectInternshipIDSql = "SELECT Intern_ID FROM internship;";
+        $selectInternshipIDResult = mysqli_query($conn, $selectInternshipIDSql);
+
+        while ($rowInternshipID = mysqli_fetch_array($selectInternshipIDResult)) {
+            $selected = ($filter_Internship_ID == $rowInternshipID["Intern_ID"]) ? 'selected' : '';
+            echo "<option value='" . $rowInternshipID["Intern_ID"] . "' $selected>" . $rowInternshipID["Intern_ID"] . "</option>";
+        }
+        ?>
+    </select>
+
+    <label for="filter_Internship_Status">Filter by Internship Status:</label>
+    <select name="filter_Internship_Status">
+        <option value="">All</option>
+        <option value="On process" <?php echo ($filter_Internship_Status == 'On process') ? 'selected' : ''; ?>>On process</option>
+        <option value="completed" <?php echo ($filter_Internship_Status == 'completed') ? 'selected' : ''; ?>>Completed</option>
+        <option value="Dropped" <?php echo ($filter_Internship_Status == 'Dropped') ? 'selected' : ''; ?>>Dropped</option>
+    </select>
+
+    <button type="submit" name="apply_filters" class="button">Apply Filters</button>
+    <button type="button" onclick="clearFilters()" class="button clear-button">Clear Filters</button>
+</form>
 
 <!-- Table Itself-->
-<h1> ALl Internship Applications</h1>
+<h1> ALL Internship Applications</h1>
 <table>
     <tr>
         <th>Application Number</th>
@@ -106,25 +166,38 @@ if (isset($_POST['insert'])) {
     </tr>
 
     <?php 
-      $selectSql = "SELECT * FROM intern_app;";
-      $selectResult = mysqli_query($conn, $selectSql);
-      $resultCheck = mysqli_num_rows($selectResult);
+        // Construct SQL query based on filters
+        $selectSql = "SELECT * FROM intern_app WHERE 1";
 
-      if ($resultCheck > 0) {
-        while ($row = mysqli_fetch_array($selectResult)) {
-          echo "<tr>";
-          echo "<td>" . $row["IA_num"] . "</td>";
-          echo "<td>" . $row["UIN"] . "</td>";
-          echo "<td>" . ($row["Intern_ID"] ? $row["Intern_ID"] : 'NULL') . "</td>";
-          echo "<td>" . ($row["Intern_status"] ? $row["Intern_status"] : 'NULL') . "</td>";
-          echo "<td>" . ($row["Intern_year"] ? $row["Intern_year"] : 'NULL') . "</td>";
-          echo "<td><button onclick=\"location.href='?edit=" . $row["IA_num"] . "'\">Edit</button> | <button onclick=\"location.href='?delete=" . $row["IA_num"] . "'\">Delete</button></td>";
-          echo "</tr>";
+        if (!empty($filter_UIN)) {
+            $selectSql .= " AND UIN = '$filter_UIN'";
         }
-      } else {
-        echo "<tr><td colspan='6'>No internship applications found</td></tr>";
-      }
-    ?>
+        if (!empty($filter_Internship_ID)) {
+            $selectSql .= " AND Intern_ID = '$filter_Internship_ID'";
+        }
+        if (!empty($filter_Internship_Status)) {
+            $selectSql .= " AND Intern_status = '$filter_Internship_Status'";
+        }
+
+        $selectResult = mysqli_query($conn, $selectSql);
+        $resultCheck = mysqli_num_rows($selectResult);
+
+        if ($resultCheck > 0) {
+            while ($row = mysqli_fetch_array($selectResult)) {
+                echo "<tr>";
+                echo "<td>" . $row["IA_num"] . "</td>";
+                echo "<td>" . $row["UIN"] . "</td>";
+                echo "<td>" . ($row["Intern_ID"] ? $row["Intern_ID"] : 'NULL') . "</td>";
+                echo "<td>" . ($row["Intern_status"] ? $row["Intern_status"] : 'NULL') . "</td>";
+                echo "<td>" . ($row["Intern_year"] ? $row["Intern_year"] : 'NULL') . "</td>";
+                echo "<td><button onclick=\"location.href='?edit=" . $row["IA_num"] . "'\">Edit</button> | <button onclick=\"location.href='?delete=" . $row["IA_num"] . "'\">Delete</button></td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr><td colspan='6'>No internship applications found</td></tr>";
+        }
+        ?>
+
 </table>
 
 <!-- Handle Edit -->
@@ -174,6 +247,12 @@ if (isset($_GET['delete'])) {
                 document.getElementsByName('Intern_status')[0].value = '';
                 document.getElementsByName('Intern_year')[0].value = '';
    
+    }
+    function clearFilters() {
+        document.getElementsByName('filter_UIN')[0].value = '';
+        document.getElementsByName('filter_Internship_ID')[0].value = '';
+        document.getElementsByName('filter_Internship_Status')[0].value = '';
+        document.forms[0].submit(); // Submit the form after clearing filters
     }
 </script>
 
