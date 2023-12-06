@@ -16,8 +16,9 @@ $filter_Class_status = '';
 // Process filters if the form is submitted
 if (isset($_POST['apply_filters'])) {
     $filter_UIN = $_POST['filter_UIN'];
-    $filter_Class_ID = $_POST['filter_Class_ID'];
-    $filter_Class_status = $_POST['filter_Class_status'];
+    $filter_Internship_ID = $_POST['filter_Internship_ID'];
+    $filter_Internship_Status = $_POST['filter_Internship_Status'];
+
 }
 ?>
 
@@ -162,7 +163,7 @@ if (isset($_POST['insert'])) {
         <th>Internship ID</th>
         <th>Internship Status</th>
         <th>Internship Year</th>
-        <th>Action</th>
+        <th>Action</th>x
     </tr>
 
     <?php 
@@ -172,9 +173,11 @@ if (isset($_POST['insert'])) {
         if (!empty($filter_UIN)) {
             $selectSql .= " AND UIN = '$filter_UIN'";
         }
+
         if (!empty($filter_Internship_ID)) {
             $selectSql .= " AND Intern_ID = '$filter_Internship_ID'";
         }
+
         if (!empty($filter_Internship_Status)) {
             $selectSql .= " AND Intern_status = '$filter_Internship_Status'";
         }
