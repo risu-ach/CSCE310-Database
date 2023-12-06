@@ -2,14 +2,14 @@
 <!-- <?php 
 include_once 'db.php';
 ?> -->
-
 <?php
 $connection = mysqli_connect("localhost", "root", "", "CSCE_310");
-
 if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
 }
 ?>
+
+
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -31,23 +31,16 @@ if (isset($_POST["update"])) {
     $App_num = $_POST['App_num'];
     $Link = $_POST['Link'];
     $Doc_type= $_POST['Doc_type'];
-    // $uinToUpdate = $_POST['UIN'];
-    // $check = "SELECT * FROM application_document_view WHERE UIN = '$uinToUpdate' AND App_num = '$App_num' ";
-    //$resultCheck = $conn->query($check); 
-    //if ($result->num_rows > 0) {
-        $updateSql = "UPDATE document SET Link = '$Link', Doc_type = '$Doc_type' WHERE Doc_num = '$Doc_num' ";
-        header("Location: document.php");
-        if (mysqli_query($connection, $updateSql)) {
-            echo "Document information updated successfully";
-        } else {
-            echo "Error updating document information: " . mysqli_error($connection);
-        }
+    $updateSql = "UPDATE document SET Link = '$Link', Doc_type = '$Doc_type' WHERE Doc_num = '$Doc_num' ";
+    header("Location: document.php");
+    if (mysqli_query($connection, $updateSql)) {
+        echo "Document information updated successfully";
     } else {
-        echo "This user does not have an application";
-    //
+        echo "Error updating document information: " . mysqli_error($connection);
+    }
 }
 
-
+//Getting the ID of the document that was selected to be updated
 $id_to_update = isset($_GET['Doc_num']) ? $_GET['Doc_num'] : die('Missing ID parameter');
 $select_query = "SELECT * FROM document WHERE Doc_num = $id_to_update";
 $result = mysqli_query($connection, $select_query);

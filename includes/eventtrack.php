@@ -3,7 +3,15 @@
 include_once 'db.php';
 include_once 'admin_app_nav.php'; 
 ?>
-
+<?php
+session_start();
+// Check if the user is logged in
+if (!isset($_SESSION["userUIN"])) {
+    // If not, redirect to the login page
+    header("Location: ../loginpage.php");
+    exit();
+}
+?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -20,27 +28,12 @@ include_once 'admin_app_nav.php';
             <a href="cc_event.php">Events</a>
             <a href="eventtrack.php">Event Tracking</a>
             <a href="document.php">Documents</a>
-        <!-- </nav>
-        <style>           
-        nav {
-            display: flex;
-            justify-content: center;
-            background-color: grey ;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 10px;
-            margin: 0 10px;
-        } 
-        </style>       -->
     <h2>Events Tracking Table</h2>
 
 <!--- Creating the event tracking table!-->
 <!--- Event tracking table uses trigger from database to automatically get inserted, updated and 
 deleted when the corresponding function is carried out on the cc_event table-->
-    <table>
+<table>
     <tr>
         <th>ET Num</th>
         <th>UIN</th>
@@ -48,7 +41,7 @@ deleted when the corresponding function is carried out on the cc_event table-->
     </tr>
 
     <?php 
-    //$uin = $_POST["UIN"];
+
     $sql = "SELECT * FROM event_tracking;";
      $result = mysqli_query($conn, $sql);
      $resultCheck = mysqli_num_rows($result);
@@ -67,14 +60,46 @@ else {
  ?> 
 </table>
 
-<!-- <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-    
-     <input type="int" name="UIN" placeholder="Student UIN">
-     <br>
-     <button type="submit" name="search">Submit</button>
-</form> -->
+<!-- Search by UIN through ebent tracking database to keep track of student attendance-->
+<!--form to get student UIN-->
+<h3>Search by UIN</h3>
+<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+    <label for="UIN">UIN:</label>
+    <input type="int" id="UIN" name="UIN" required>
+    <button type="submit" name="searchUIN">Search</button>
+</form> 
 
-
+<!--Output rows from event tracking table that correspond to that UIN-->
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["searchUIN"])) {
+    $getUIN = $_POST['UIN'];
+    $searchSql= "SELECT * FROM event_tracking WHERE UIN = '$getUIN'";
+    $result = $conn->query($searchSql);
+    $resultCheck = mysqli_num_rows($result);
+    if($resultCheck == 0){
+        echo "This student is not attending any events";
+    }
+    else {
+        $rows = $result->fetch_all(MYSQLI_ASSOC); 
+    ?>
+        <table>
+        <tr>
+            <th>ET Number</th>
+            <th>UIN</th>
+            <th>Event_ID</th>
+        </tr>
+        <?php foreach ($rows as $row): ?>
+            <tr>
+                <td><?php echo $row['ET_Num']; ?></td>
+                <td><?php echo $row['UIN']; ?></td>
+                <td><?php echo $row['Event_ID']; ?></td>
+            </tr> 
+        <?php endforeach; ?>
+    <?php
+    }
+}
+?>
+</table>
 </body>
 </html>
 

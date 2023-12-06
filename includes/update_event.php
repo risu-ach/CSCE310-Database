@@ -2,16 +2,11 @@
 
 <?php 
 include_once 'db.php';
-?>
-
-<?php
 $connection = mysqli_connect("localhost", "root", "", "CSCE_310");
-
 if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
 }
 ?>
-
 
 <!DOCTYPE html>
     <html lang="en">
@@ -44,11 +39,12 @@ if (!$connection) {
         }
 }
 
-    $id_to_update = isset($_GET['Event_ID']) ? $_GET['Event_ID'] : die('Missing ID parameter');
-    $select_query = "SELECT * FROM cc_event WHERE Event_ID = $id_to_update";
-    $result = mysqli_query($connection, $select_query);
-    $row = mysqli_fetch_assoc($result);
-    ?>
+//Getting the ID of the event that was selected to be updated/edited
+$id_to_update = isset($_GET['Event_ID']) ? $_GET['Event_ID'] : die('Missing ID parameter');
+$select_query = "SELECT * FROM cc_event WHERE Event_ID = $id_to_update";
+$result = mysqli_query($connection, $select_query);
+$row = mysqli_fetch_assoc($result);
+?>
 
 <!--- form to fill out information to edit/update an event!-->
 <form action="cc_event.php">
