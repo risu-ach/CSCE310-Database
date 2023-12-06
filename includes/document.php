@@ -86,7 +86,7 @@ if (isset($_GET['delete'])) {
     added/updated/deleted accordingly-->
         <?php
             $sessionUIN = $_SESSION['userUIN'];
-            $sql = "SELECT * FROM application_document_view where UIN = '$sessionUIN'";
+            $sql = "SELECT * FROM application_document_view WHERE UIN = '$sessionUIN' AND Doc_num IS NOT NULL";
             $result = mysqli_query($conn, $sql);
             $resultCheck = mysqli_num_rows($result);
             if ($resultCheck > 0){
