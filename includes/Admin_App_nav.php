@@ -37,7 +37,7 @@
         /*  fixed navigation bar */
         body {
             font-family: Arial, sans-serif;
-            margin-top: 60px;
+            margin-top: 100px;
         }
 
         h1 {
@@ -129,6 +129,7 @@
     <li class="navitem"><a href="class_enrollment.php">Classes Application</a></li>
     <li class="navitem"><a href="cc_event.php">Events</a></li>
     <li class="navitem"><a href="eventtrack.php">Event Tracking</a></li>
+    <li class="navitem"><a href="../admin_page.php">Account Info</a></li>
     <li class="navitem"><a href="../logout.php">Logout</a></li>
     
 
