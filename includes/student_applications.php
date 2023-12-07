@@ -1,3 +1,4 @@
+<!-- Made by Matthew Edge -->
 <?php include_once 'db.php'; ?>
 <?php include_once 'Student_App_nav.php'; ?> <!-- Include the navigation bar -->
 <?php 
