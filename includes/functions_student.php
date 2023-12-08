@@ -1,7 +1,14 @@
 <?php
+//Maya Lotfy 
+//UIN: 730001793
+
+
+
+include_once 'db.php';
 // Function to fetch and display user information
 function displayUserProfile($userUIN, $conn)
 {
+    
     $sql = "SELECT * FROM user_college_student_view WHERE UIN = '$userUIN'";
 
     $result = $conn->query($sql);
@@ -50,8 +57,9 @@ function removeAccess($userUIN, $conn)
     $sql = "UPDATE users SET User_type='No Access Student' WHERE UIN=$userUIN";
     if ($conn->query($sql) === TRUE) {
         // Add any additional actions after successful update
-        header("Location: logout.php");
-        exit();
+        //echo '<script>displayMessage("Account Deactivated");</script>';
+        //header("Location: logout.php");
+        //exit();
     } else {
         echo "Error: " . $sql . "\n" . $conn->error;
     }
@@ -73,6 +81,8 @@ function updateCredentials($userUIN, $newUsername, $newPassword, $conn)
 // Function to update user profile
 function updateProfileFields($userUIN, $formData, $conn)
 {
+
+
 
     // Get the columns in the 'users' and 'college_student' tables
     $usersColumns = getColumnNames($conn, 'users');
@@ -129,7 +139,8 @@ function updateProfileFields($userUIN, $formData, $conn)
 
 }
 
-function displayStudentInfo($userUIN,$conn){
+function displayStudentInfo(){
+    
     // Fetch user profile fields dynamically
     $userDataSql = "SELECT * FROM users WHERE UIN = '$userUIN'";
     $userDataResult = $conn->query($userDataSql);

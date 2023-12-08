@@ -1,3 +1,7 @@
+//Maya Lotfy 
+//UIN: 730001793
+
+
 var updateClicked = false;
 
 function toggleProfile() {
@@ -44,9 +48,9 @@ function confirmDeactivate() {
     var confirmation = confirm("Are you sure you want to deactivate your account?");
     if (confirmation) {
         // If user clicks "Yes", submit the form and call removeAccess()
-        window.location.href = "logout.php?deactivate=true";
-    } else {
-        
+        window.location.href = "student_page.php?deactivate=true";
+        alert("Account Deactivated");
+        window.location.href = "logout.php";
     }
 
 }
@@ -65,9 +69,8 @@ function submitCredentialsForm() {
         alert("Passwords do not match.");
         return;
     }
-
     // Redirect to the page with a parameter indicating credentials update
-    window.location.href = "student_page.php?updateCredentials=true&newUsername=" + encodeURIComponent(newUsername) + "&newPassword=" + encodeURIComponent(newPassword);
+    window.location.href = "student_page.php?updateCredentials=true?newUsername=" + encodeURIComponent(newUsername) + "&newPassword=" + encodeURIComponent(newPassword);
 }
 
 

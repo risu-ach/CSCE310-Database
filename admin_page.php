@@ -1,5 +1,12 @@
+
+<!-- 
+    Maya Lotfy
+    UIN: 730001793
+
+-->
 <!DOCTYPE html>
 <html lang="en">
+
 
 <head>
     <meta charset="UTF-8">
@@ -11,23 +18,25 @@
 </head>
 <body>
 
-<script>
+    <script>
+        //Maya Lotfy 
+        //UIN: 730001793
 
-    function displayMessage(message) {
-        alert(message);
-        window.location.href = "admin_page.php";;
-    }
+        function displayMessage(message) {
+            alert(message);
+            window.location.href = "admin_page.php";
+        }
 
-</script>
+    </script>
 
-<?php
-    include_once 'includes/db.php';
-    include_once 'includes/functions_admin.php';
+    <?php
+        include_once 'includes/db.php';
+        include_once 'includes/functions_admin.php';
 
 
-    session_start();
-    $userUIN = $_SESSION["userUIN"];
-    $userName = $_SESSION["userName"];
+        session_start();
+        $userUIN = $_SESSION["userUIN"];
+        $userName = $_SESSION["userName"];
     ?>
 
     <h1>Admin Profile</h1>

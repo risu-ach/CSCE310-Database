@@ -1,4 +1,5 @@
-
+//Maya Lotfy 
+//UIN: 730001793
 function toggleForm() {
     var form = document.getElementById("addUserForm");
     form.style.display = (form.style.display === "none") ? "block" : "none";

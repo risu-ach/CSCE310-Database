@@ -1,26 +1,10 @@
-<?php
-include_once 'includes/db.php';
-include_once 'includes/functions_student';
-session_start();
-// Check if the user is logged in
-if (!isset($_SESSION["userUIN"])) {
-    // If not, redirect to the login page
-    header("Location: login.php");
-    exit();
-}
 
-$userUIN = $_SESSION["userUIN"];
-$userName = $_SESSION["userName"];
 
-?>
-<script>
+<!-- 
+    Maya Lotfy
+    UIN: 730001793
 
-function displayMessage(message) {
-    alert(message);
-    window.location.href = "student_page.php";
-}
-
-</script>
+-->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,10 +20,36 @@ function displayMessage(message) {
 
 
 <body>
+    <script>
 
-    <h1>User Profile</h1>
-    <p>Welcome, <?php echo $userName; ?>, <?php echo $userUIN; ?>!</p>
+    function displayMessage(message) {
+        alert(message);
+        window.location.href = "student_page.php";
+    }
 
+    </script>
+
+    <?php
+    include_once 'includes/db.php';
+    include_once 'includes/functions_student';
+    session_start();
+    // Check if the user is logged in
+    if (!isset($_SESSION["userUIN"])) {
+        // If not, redirect to the login page
+        header("Location: login.php");
+        exit();
+    }
+
+    $userUIN = $_SESSION["userUIN"];
+    $userName = $_SESSION["userName"];
+
+    ?>
+
+    <header>
+
+        <h1>User Profile</h1>
+        <p>Welcome, <?php echo $userName; ?>, <?php echo $userUIN; ?>!</p>
+    </header>
     <!-- Button to toggle view/hide administrators -->
     <button onclick="toggleProfile()">View Profile</button>
     <button onclick="toggleUpdateForm()" id="updateButton" style="display:none;">Update Personal Information</button>
@@ -147,16 +157,20 @@ function displayMessage(message) {
         // Check if the "deactivate" parameter is set in the URL
         if (isset($_GET['deactivate']) && $_GET['deactivate'] == 'true') {
             // If yes, call the removeAccess function
+            $userUIN = $_SESSION["userUIN"];
             removeAccess($userUIN, $conn);
         }
 
         // Check if the "updateCredentials" parameter is set in the URL
+        
         if (isset($_GET['updateCredentials']) && $_GET['updateCredentials'] == 'true') {
             // If yes, call the updateCredentials function
+
             $newUsername = $_GET['newUsername'];
             $newPassword = $_GET['newPassword'];
             updateCredentials($userUIN, $newUsername, $newPassword, $conn);
         }
+        
 
         if (isset($_GET['updateProfile']) && $_GET['updateProfile'] == 'true') {
             // If yes, call the updateProfileField function
