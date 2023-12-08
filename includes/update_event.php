@@ -1,5 +1,4 @@
 <!-- Sarah Abusada:Functionality set 4 -->
-
 <?php 
 include_once 'db.php';
 $connection = mysqli_connect("localhost", "root", "", "CSCE_310");
@@ -7,7 +6,6 @@ if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
 }
 ?>
-
 <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -61,6 +59,5 @@ $row = mysqli_fetch_assoc($result);
     Event Type: <input type='varchar' name='Event_type' value="<?php echo $row['Event_type']; ?>"><br>
     <input type='submit' name='update' value='Update'>
 </form>
-
 </body>
 </html>
