@@ -1,3 +1,4 @@
+<!-- Made by Matthew Edge -->
 <?php include_once 'db.php'; ?>
 <?php include_once 'Student_App_nav.php'; ?> <!-- Include the navigation bar -->
 <?php 
@@ -108,7 +109,9 @@ $userName = $_SESSION["userName"];
     </tr>
 
     <?php 
-      $selectSql = "SELECT * FROM application WHERE UIN = '$userUIN';";
+      $selectSql = "CREATE OR REPLACE VIEW student_apps_view AS SELECT App_num, Program_num, UIN, Uncom_cert, Com_cert, Purpose_statement FROM application WHERE UIN = '$userUIN';";
+      $selectResult = mysqli_query($conn, $selectSql);
+      $selectSql = "SELECT * FROM student_apps_view;";
       $selectResult = mysqli_query($conn, $selectSql);
       $resultCheck = mysqli_num_rows($selectResult);
 
