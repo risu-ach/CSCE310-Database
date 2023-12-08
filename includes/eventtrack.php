@@ -19,7 +19,6 @@ if (!isset($_SESSION["userUIN"])) {
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!--<link rel="stylesheet" href="style.css"> -->
         <title>Track Events</title>
     </head>
     <body>
@@ -27,7 +26,7 @@ if (!isset($_SESSION["userUIN"])) {
 
 <!--- Creating the event tracking table!-->
 <!--- Event tracking table uses trigger from database to automatically get inserted, updated and 
-deleted when the corresponding function is carried out on the cc_event table-->
+deleted when the corresponding function is carried out on the cc_event table.-->
 <table>
     <tr>
         <th>ET Num</th>
@@ -36,10 +35,9 @@ deleted when the corresponding function is carried out on the cc_event table-->
     </tr>
 
     <?php 
-
     $sql = "SELECT * FROM event_tracking;";
-     $result = mysqli_query($conn, $sql);
-     $resultCheck = mysqli_num_rows($result);
+    $result = mysqli_query($conn, $sql);
+    $resultCheck = mysqli_num_rows($result);
     if ($resultCheck > 0){
     while ($row = mysqli_fetch_array($result)) {
             echo "<tr>";
@@ -51,11 +49,11 @@ deleted when the corresponding function is carried out on the cc_event table-->
 }
 else {
     echo "<tr><td colspan='4'>No events found</td></tr>";
-  }
- ?> 
+}
+?> 
 </table>
 
-<!-- Search by UIN through ebent tracking database to keep track of student attendance-->
+<!-- Search by UIN through event tracking database to keep track of student attendance-->
 <!--form to get student UIN-->
 <h3>Search by UIN</h3>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">

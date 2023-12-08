@@ -1,15 +1,11 @@
 <!-- Sarah Abusada:Functionality set 4 -->
-<!-- <?php 
+<?php 
 include_once 'db.php';
-?> -->
-<?php
 $connection = mysqli_connect("localhost", "root", "", "CSCE_310");
 if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
 }
 ?>
-
-
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -24,7 +20,6 @@ if (!$connection) {
 <!--- Function to update/edit a document!-->
 <!--- Uses a view combing application and document table
 to make sure a user exists with corresponding application before update/edit a document!-->
-
 <?php
 if (isset($_POST["update"])) {
     $Doc_num = $_POST['Doc_num'];
@@ -58,6 +53,5 @@ $row = mysqli_fetch_assoc($result);
     Document Type: <input type='varchar' name='Doc_type' value="<?php echo $row['Doc_type']; ?>"><br>
     <input type='submit' name='update' value='Update'>
 </form>
-
 </body>
 </html>

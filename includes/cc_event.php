@@ -1,5 +1,4 @@
 <!-- Sarah Abusada:Functionality set 4 -->
-
 <?php 
     include_once 'db.php';
     include_once 'admin_app_nav.php'; 
@@ -18,7 +17,6 @@ if (!isset($_SESSION["userUIN"])) {
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!--<link rel="stylesheet" href="style.css"> -->
         <title>Events</title>
     </head>
         <body>
@@ -130,7 +128,7 @@ if (isset($_GET["delete"])) {
             <td><?php echo $row['Event_type']; ?></td>
             <?php
             echo "<td><a href='update_event.php?Event_ID={$row['Event_ID']}'>Update</a> </td>"; //update/edit a specific event
-            echo "<td><a href='?delete=" . $row["Event_ID"] . "'>Delete</a></td>"; //deletea\ ane event
+            echo "<td><a href='?delete=" . $row["Event_ID"] . "'>Delete</a></td>"; //delete an  event
             ?>
         </tr> 
     <?php endforeach; ?>
@@ -185,6 +183,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["searchProgramNum"])) {
     }
 }
 ?>
-        </table>
+</table>
 </body>
 </html> 

@@ -1,4 +1,4 @@
-Sarah Abusada:Functionality set 4
+<!--Sarah Abusada:Functionality set 4-->
 <?php 
 include_once 'db.php';
 include_once 'Student_App_nav.php';
@@ -32,6 +32,7 @@ $sessionUIN = $_SESSION['userUIN']; // variable to keep track of current user is
     <label for="App_num">Application Number:</label>
     <select name="App_num" required>
     <?php
+        //Use UIN from session to find application numbers associated with curretn user logged in UIN 
         $selectApplicationSql = "SELECT App_num FROM application_document_view WHERE UIN = '$sessionUIN';";
         $selectApplicationResult = mysqli_query($conn, $selectApplicationSql); 
         while ($rowApp = mysqli_fetch_array($selectApplicationResult)) {
@@ -107,4 +108,6 @@ if (isset($_GET['delete'])) {
         }
         
         ?> 
-    </table>
+</table>
+</body>
+</html>
