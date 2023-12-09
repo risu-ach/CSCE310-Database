@@ -5,7 +5,7 @@
 
 
 include_once 'db.php';
-// Function to fetch and display user information
+//fetching and display student information
 function displayUserProfile($userUIN, $conn)
 {
     
@@ -56,48 +56,42 @@ function removeAccess($userUIN, $conn)
 
     $sql = "UPDATE users SET User_type='No Access Student' WHERE UIN=$userUIN";
     if ($conn->query($sql) === TRUE) {
-        // Add any additional actions after successful update
-        //echo '<script>displayMessage("Account Deactivated");</script>';
-        //header("Location: logout.php");
-        //exit();
+        echo '<script>displayMessage("Account Deactivated");</script>';
     } else {
-        echo "Error: " . $sql . "\n" . $conn->error;
+        '<script>displayMessage("Error.");</script>';
     }
 }
 
 // Function to update user credentials
 function updateCredentials($userUIN, $newUsername, $newPassword, $conn)
 {
-    $sql = "UPDATE users SET Username='$newUsername', Passwords='$newPassword' WHERE UIN=$userUIN";
-    if ($conn->query($sql) === TRUE) {
-        // Add any additional actions after successful update
-        echo '<script>displayMessage("Credentials updated Successfully.");</script>';
 
+    $stmt = $conn->prepare("UPDATE users SET Username=?, Passwords=? WHERE UIN=?");
+    $stmt->bind_param('ssi', $newUsername, $newPassword, $userUIN);
+
+    if ($stmt->execute()) {
+        echo '<script>displayMessage("Credentials updated Successfully.");</script>';
     } else {
-        echo "Error: " . $sql . "\n" . $conn->error;
+        echo '<script>displayMessage("Error updating credentials.");</script>';
     }
+
+    $stmt->close();
+    
 }
 
 // Function to update user profile
 function updateProfileFields($userUIN, $formData, $conn)
 {
 
-
-
-    // Get the columns in the 'users' and 'college_student' tables
+    // Retrieving columns from the users and college_student tables
     $usersColumns = getColumnNames($conn, 'users');
     $collegeStudentColumns = getColumnNames($conn, 'college_student');
 
-
-    // Process the form data and update the profile fields
     foreach ($formData as $field => $value) {
-        // Ensure the field is not 'updateProfile' or any other unwanted field
         if ($field !== 'updateProfile' && $field !== 'newPassword' && $field !== 'confirmPassword') {
-            $field = substr($field, 3); // Remove the 'new' prefix
-            // Use prepared statements to prevent SQL injection
-           // Check if the field exists in the 'users' table
+            $field = substr($field, 3); 
            if (in_array($field, $usersColumns)) {
-            // Use prepared statements to prevent SQL injection
+                //prevent SQL injection using execute
                 $stmt = $conn->prepare("UPDATE users SET $field = ? WHERE UIN = ?");
                 $stmt->bind_param('si', $value, $userUIN);
 
@@ -112,13 +106,12 @@ function updateProfileFields($userUIN, $formData, $conn)
     }
 
     foreach ($formData as $field => $value) {
-        // Ensure the field is not 'updateProfile' or any other unwanted field
         if ($field !== 'updateProfile' && $field !== 'newPassword' && $field !== 'confirmPassword') {
-            $field = substr($field, 3); // Remove the 'new' prefix
+            $field = substr($field, 3);
 
-            // Check if the field exists in the 'college_student' table
+            // Checking if the field exists in the 'college_student' table
             if (in_array($field, $collegeStudentColumns)) {
-                // Use prepared statements to prevent SQL injection
+                //prevent SQL injection using execute
                 $stmt = $conn->prepare("UPDATE college_student SET $field = ? WHERE UIN = ?");
                 $stmt->bind_param('si', $value, $userUIN);
 
@@ -127,21 +120,17 @@ function updateProfileFields($userUIN, $formData, $conn)
 
                 }
 
-            
-
                 $stmt->close();
             }
         }
     }
-
-    // Add any additional actions after successful update
     echo '<script>displayMessage("Profile Updated Successfully.");</script>';
 
 }
 
 function displayStudentInfo(){
     
-    // Fetch user profile fields dynamically
+    // student profile fields from users table
     $userDataSql = "SELECT * FROM users WHERE UIN = '$userUIN'";
     $userDataResult = $conn->query($userDataSql);
     $nonEditableFields = ['UIN', 'Passwords'];
@@ -150,23 +139,20 @@ function displayStudentInfo(){
     if ($userDataResult->num_rows > 0) {
         $userData = $userDataResult->fetch_assoc();
 
-        // Generate form fields for each user profile field
+        //fields for each student profile field
+        //in users table
         foreach ($userData as $field => $value) {
             $editable = true;
 
-            // Check if the current field is in the nonEditableFields array
             if (in_array($field, $nonEditableFields)) {
                 $editable = false;
             }
 
-
-            if ( $field != 'User_type' && $editable ) { // Exclude certain fields, adjust as needed
+            if ( $field != 'User_type' && $editable ) {
                 echo '<label for="new' . $field . '">' . ucfirst($field) . ':</label>';
                 echo '<input type="text" id="new' . $field . '" name="new' . $field . '" value="' . $value . '"><br>';
             }
             elseif ($field != 'Passwords' && $field != 'User_type'){
-
-                // Display the value as text if the field is not editable
                 echo '<label>' . ucfirst($field) . ':</label>';
                 echo '<span>' . $value . '</span><br>';
             }
@@ -182,10 +168,10 @@ function displayStudentInfo(){
     if ($studentDataResult->num_rows > 0) {
         $studentData = $studentDataResult->fetch_assoc();
 
-        // Generate form fields for each user profile field
+        //fields for each student profile field
+        //in students table
         foreach ($studentData as $field => $value) {
             $editable = true;
-             // Check if the current field is in the nonEditableFields array
             if (in_array($field, $nonEditableFields)) {
                 $editable = false;
             }
@@ -194,7 +180,7 @@ function displayStudentInfo(){
                 echo '<input type="text" id="new' . $field . '" name="new' . $field . '" value="' . $value . '"><br>';
             }
             elseif ($field != 'UIN' && $field != 'Student_type'){
-                // Display the value as text if the field is not editable
+                // Displaying the value if the field is not editable
                 echo '<label>' . ucfirst($field) . ':</label>';
                 echo '<span>' . $value . '</span><br>';
 
@@ -206,7 +192,6 @@ function displayStudentInfo(){
     }
 
 }
-            
             
 
 // Function to get column names of a table

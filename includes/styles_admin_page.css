@@ -5,9 +5,25 @@ UIN: 730001793
 
 body {
     font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin: 20px;
-    background-color: #f4f4f4;
-    color: #333;
+    margin-top: 60px;
+}
+
+header {
+    background-color: #388e3c;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #fff;
     
 }
 
@@ -17,20 +33,28 @@ table {
     margin-top: 20px;
 }
 
+.table-container {
+    display: flex;
+    justify-content: center;
+}
+
 th,
 td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
+    font-size: 15px;
 }
 
 th {
-    background-color: #004953;
+    background-color: #388e3c;
     color: #fff;
 }
 
 form {
     margin-bottom: 20px;
+    max-width: 400px;
+    margin: auto;
     display: none;
 }
 
@@ -47,16 +71,76 @@ legend {
 
 button {
     margin-bottom: 10px;
-    background-color:#004953 ;
+    background-color: #388e3c ;
     color: #fff;
     padding: 8px 16px;
     border: none;
     cursor: pointer;
     border-radius: 4px;
 }
-button:hover {
-    background-color: #004040;
+
+.button-container button {
+    
+    border: none;
+    padding: 15px 25px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    transition: background-color 0.3s;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #4CAF50; /* Green */
 }
+.button-container button:hover {
+    background-color: #0069C0; /* Blue on hover */
+    transform: scale(1.05);
+}
+
+.button-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: auto;
+    grid-gap: 20px;
+    margin: 50px auto;
+  
+}
+
+.studentInfoContainer table {
+    border-collapse: collapse;
+    width: 60%; 
+    margin-top: 20px;
+    overflow-x: auto; 
+}
+
+.studentInfoContainer {
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+}
+
+.studentInfoContainer td, .studentInfoContainer th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    font-size: 11px;
+    white-space: nowrap; 
+}
+
+.studentInfoContainer th {
+    background-color: #0069C0;
+    color: #fff;
+    font-size: 10px;
+}
+
+.form-container {
+    margin-top: 20px; 
+}
+
+
 
 input,
 select {
@@ -64,6 +148,18 @@ select {
     padding: 8px;
     box-sizing: border-box;
     margin-bottom: 10px;
+}
+
+input[type="submit"],
+.button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
 }
 
 #studentFields {
@@ -79,8 +175,3 @@ select {
     margin-top: 10px;
 }
 
-/* Adjusted spacing for checkbox fields */
-#addUserForm input[type="checkbox"] {
-    margin-right: 5px;
-    vertical-align: middle;
-}

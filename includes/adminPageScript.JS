@@ -28,6 +28,7 @@ function toggleView() {
 }
 
 function toggleUpdateAdminForm(uin, firstName, middleInitial, lastName, username, userType, email, discordName){
+    var form = document.getElementById("updateAdminForm");
 
     document.querySelector('#updateAdminForm [name="updateAdminUIN"]').value = uin;
     document.querySelector('#updateAdminForm [name="updateAdminFirstName"]').value = firstName;
@@ -37,7 +38,8 @@ function toggleUpdateAdminForm(uin, firstName, middleInitial, lastName, username
     document.querySelector('#updateAdminForm [name="updateAdminUserType"]').value = userType;
     document.querySelector('#updateAdminForm [name="updateAdminEmail"]').value = email;
     document.querySelector('#updateAdminForm [name="updateAdminDiscordName"]').value = discordName;
-    document.getElementById('updateAdminForm').style.display = 'block';
+    form.style.display = (form.style.display === "none") ? "block" : "none";
+
 
 }
 function populateUpdateStudentForm(userData) {
@@ -104,8 +106,8 @@ function toggleStudentFields() {
 }
 
 function toggleStudents() {
-    var container = document.getElementById('studentInfoContainer');
-    container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+    var table = document.getElementById("studentTable");
+    table.style.display = (table.style.display === "none") ? "table" : "none";
 }
 
 function logout() {

@@ -68,7 +68,7 @@ function addStudent($UIN, $gender, $hispanicLatino, $race, $usCitizen, $firstGen
 }
 
 function updateStudent($updateUIN, $updateData) {
-    // Example: Update the college_student table
+    // Update the college_student table
     global $conn;
 
     $updateQuery = "UPDATE college_student SET 
@@ -92,27 +92,22 @@ function updateStudent($updateUIN, $updateData) {
         // Convert the date from m-d-Y to Y-m-d
         $dateObj = DateTime::createFromFormat('m-d-Y', $updateData['updatedob']);
         $formattedDate = $dateObj ? $dateObj->format('Y-m-d') : null;
-
-        // Add the formatted date to the query
+        // Adding the formatted date to the query
         if ($formattedDate !== null) {
             $updateQuery .= ", DoB = '{$formattedDate}'";
         }
     }
 
     $updateQuery .= " WHERE UIN = '{$updateUIN}'";
-
-    // Execute the update query
     if ($conn->query($updateQuery) === TRUE) {
-        // Update successful
-        // You can add additional logic here if needed
+        
     } else {
         // Handle the case where the update fails
-        echo "Error updating record: " . $conn->error;
     }
 }
 
 
-// c. Select: View a list of all user types along with their roles.
+// View a list of all user types along with their roles.
 function viewAllUsers()
 {
     global $conn;
@@ -189,7 +184,7 @@ function viewAllUsers()
 }
 
 
-// i. Delete: Remove access to the system for a given account.
+// Remove access to the system for a given account.
 function removeAccess($uin, $userType)
 {
     global $conn;
@@ -210,11 +205,10 @@ function removeAccess($uin, $userType)
 
     }
 }
-// ii. Delete: Full delete with corresponding data.
+// delete user
 function fullDelete($uin)
 {
     global $conn;
-   // Use prepared statements to prevent SQL injection
     $sql = "DELETE FROM users WHERE UIN = ?";
     $sqlStudent = "DELETE FROM college_student WHERE UIN = ?";
     
@@ -248,17 +242,8 @@ function toggleStudents(){
     $sql = "SELECT * FROM user_student_view";
     $result = $conn->query($sql);
 
-    echo '<div id="studentInfoContainer">';
-
     if ($result->num_rows > 0) {
-        echo '<table border="1">';
-        echo '<tr><th>UIN</th><th>First Name</th><th>Middle Initial</th>
-        <th>Last Name</th><th>Username</th><th>Email</th><th>Discord Name</th>
-        <th>Gender</th><th>Hispanic/Latino</th><th>Race</th>
-        <th>US citizen</th><th>First Generation</th><th>DOB</th>
-        <th>GPA</th><th>Major</th><th>Minor1</th><th>Minor2</th>
-        <th>Expected Graduation</th><th>School</th><th>Classification</th>
-        <th>Phone</th><th>Student Type</th></tr>';  
+          
         while ($Data = $result->fetch_assoc()) {
             echo '<tr>';
             echo '<td>' . $Data["UIN"] . '</td>';
@@ -266,6 +251,7 @@ function toggleStudents(){
             echo '<td>' . $Data["M_initial"] . '</td>';
             echo '<td>' . $Data["Last_name"] . '</td>';
             echo '<td>' . $Data["Username"] . '</td>';
+            echo '<td>' . $Data["User_type"] . '</td>';
             echo '<td>' . $Data["Email"] . '</td>';
             echo '<td>' . $Data["Discord_name"] . '</td>';
             echo '<td>' . $Data["Gender"] . '</td>';
@@ -283,18 +269,16 @@ function toggleStudents(){
             echo '<td>' . $Data["Classification"] . '</td>';
             echo '<td>' . $Data["Phone"] . '</td>';
             echo '<td>' . $Data["Student_type"] . '</td>';
+            echo '</tr>';
             
         }
         echo '</table>';
+       
     } 
     else {
         echo '<p>No student information available.</p>';
-    }
-
-    echo '</div>';
+    }  
 }
-
-
 
 session_write_close();
 ?>

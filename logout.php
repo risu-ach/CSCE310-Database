@@ -3,8 +3,6 @@
 //UIN: 730001793
 
 
-
-// Start the session
 session_start();
 
 // Destroy all session data

@@ -12,15 +12,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Management System</title>
-    <link rel="stylesheet" type = "text/css" href="../includes/styles_admin_page">
-    <script src="../includes/adminPageScript" defer></script>
+    <link rel="stylesheet" type = "text/css" href="../includes/styles_admin_page.css">
+    <script src="../includes/adminPageScript.JS" defer></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
 
     <script>
-        //Maya Lotfy 
-        //UIN: 730001793
 
         function displayMessage(message) {
             alert(message);
@@ -38,14 +36,20 @@
         $userUIN = $_SESSION["userUIN"];
         $userName = $_SESSION["userName"];
     ?>
+    <header>
 
-    <h1>Admin Profile</h1>
-    <p>Welcome, <?php echo $userName; ?>, <?php echo $userUIN; ?>!</p>
+        <h1>Admin Profile</h1>
+        <h2>Welcome, <?php echo $userName; ?>, <?php echo $userUIN; ?>!</p>
 
-    <button onclick="toggleForm()">Add New User</button>
-    <button onclick="toggleView()">View All Users</button>
-    <button onclick = "toggleStudents()" action = 'toggleStudents'>Students' Information</button>
-    <button onclick="logout()">logout</button>
+    </header>
+
+    <div class="button-container">
+
+        <button onclick="toggleForm()">Add New User</button>
+        <button onclick="toggleView()">View All Users</button>
+        <button onclick = "toggleStudents()">Students' Information</button>
+        <button onclick="logout()">logout</button>
+    </div>
 
     <!-- Form for Adding New User -->
     <form method="post" action="" id="addUserForm">
@@ -173,33 +177,13 @@
         </fieldset>
     </form>
 
-    <table id="userTable" style="display: none;">
-        <tr>
-            
-            <th>UIN</th>
-            <th>First Name</th>
-            <th>Middle Initial</th>
-            <th>Last Name</th>
-            <th>Username</th>
-            <th>User Type</th>
-            <th>Email</th>
-            <th>Discord Name</th>
-            <th>Action</th>
-            <th>Action</th>
-            <th>Action</th>
+    <!-- Form for Updating students -->
 
-            
-        </tr>
-        <?php
-        viewAllUsers();
-        ?>
-    </table>
-    
+
     <form method="post" action="" id="updateStudentForm" style="display: none;">
         <label for="updateUIN">UIN:</label>
         <input type="text" name="updateUIN" id="updateUIN" readonly>
 
-        <!-- Include fields specific to students -->
         <label for="updateFirstName">First Name:</label>
         <input type="text" name="updateFirstName" id="updateFirstName" >
 
@@ -340,22 +324,87 @@
 
     </form>
 
-    <form id="removeAccessForm" method="post" >
-        <input type="hidden" name="action" value="removeAccess">
-        <input type="hidden" name="uin" id="removeUIN">
-        <input type="hidden" name="userType" id="removeUserType">
-        <input type="submit" name="removeAccess" value="Remove Access">
-    </form>
-    <!-- Form for Full Delete -->
-    <form method="post" action="" id="fullDeleteForm">
-        <input type="hidden" name="action" value="fullDelete">
-        <input type="hidden" name="uin" id="deleteUIN">
-        <input type="submit" name="fullDelete" value="Full Delete">
-    </form>
 
-    <div id="studentInfoContainer" style="display:none;">
-        <?php toggleStudents(); ?>
+    <div id="studentInfoContainer">
+
+        <table id="studentTable" style="display: none;">
+            <tr>
+                
+                <th>UIN</th>
+                <th>First Name</th>
+                <th>Middle Initial</th>
+                <th>Last Name</th>
+                <th>Username</th>
+                <th>User Type</th>
+                <th>Email</th>
+                <th>Discord Name</th>
+                <th>Gender</th>
+                <th>Hispanic/Latino</th>
+                <th>Race</th>
+                <th>US citizen</th>
+                <th>First Generation</th>
+                <th>DOB</th>
+                <th>GPA</th>
+                <th>Major</th>
+                <th>Minor1</th>
+                <th>Minor2</th>
+                <th>Expected Graduation</th>
+                <th>School</th>
+                <th>Classification</th>
+                <th>Phone</th>
+                <th>Student Type</th>
+                
+            </tr>
+            <?php toggleStudents(); ?>
+            
+        </table>
+
     </div>
+
+    <div class="table-container">
+        <table id="userTable" style="display: none;">
+            <tr>
+                
+                <th>UIN</th>
+                <th>First Name</th>
+                <th>Middle Initial</th>
+                <th>Last Name</th>
+                <th>Username</th>
+                <th>User Type</th>
+                <th>Email</th>
+                <th>Discord Name</th>
+                <th>Action</th>
+                <th>Action</th>
+                <th>Action</th>
+                
+            </tr>
+            <?php
+            viewAllUsers();
+            ?>
+        </table>
+
+
+    </div>
+    <div class="form-container">
+
+        <!-- Form for removing access -->
+
+        <form id="removeAccessForm" method="post" >
+            <input type="hidden" name="action" value="removeAccess">
+            <input type="hidden" name="uin" id="removeUIN">
+            <input type="hidden" name="userType" id="removeUserType">
+            <input type="submit" name="removeAccess" value="Remove Access">
+        </form>
+        <!-- Form for Full Delete -->
+        <form method="post" action="" id="fullDeleteForm">
+            <input type="hidden" name="action" value="fullDelete">
+            <input type="hidden" name="uin" id="deleteUIN">
+            <input type="submit" name="fullDelete" value="Full Delete">
+        </form>
+    </div>
+
+    
+
 
     <?php
     
@@ -437,9 +486,6 @@
 
     }
 
-    if (isset($_GET['action']) && $_GET['action'] == 'toggleStudents') {
-        toggleStudents();
-    }
 
     ?>
 </body>
