@@ -25,6 +25,7 @@ StartPage: index.php (directs to loginpage.php)
         update_document.php
     logout.php
 Connector:Db.php
+ALL Sql Commands to create the initial database : SQLCommands.pdf
 
 Admin Functionalities: 
 User Authentication and Roles (Maya)
